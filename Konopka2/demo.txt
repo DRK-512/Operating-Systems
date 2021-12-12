@@ -1,0 +1,60 @@
+osc@ubuntu:~/BolarKonopka2$ gcc prime.c primeFunctions.c -o prime
+osc@ubuntu:~/BolarKonopka2$ ./prime
+Segmentation fault (core dumped)
+osc@ubuntu:~/BolarKonopka2$ gcc main.c schedulerFunctions.c -o scheduler
+osc@ubuntu:~/BolarKonopka2$ ./scheduler
+Error! Could not open file
+osc@ubuntu:~/BolarKonopka2$ ./scheduler input.txt 
+Scheduler: Starting Process 0 with Remaining Time : 7 
+Process 0: my PID is <1507>: I just got started.I am starting with the number 1596466577 to find the next prime number.
+Scheduler: Time Now: 2 seconds. Process Running : 0 Burst Left : 6
+Scheduler: Suspending Process 0 with Remaining Time : 6 
+Scheduler: Starting Process 1 with Remaining Time : 4 
+Process 0: my PID is <1507>: I am suspending.Largest prime I found is 1596466577. 
+Process 1: my PID is <1508>: I just got started.I am starting with the number 1096500433 to find the next prime number.
+Scheduler: Time Now: 3 seconds. Process Running : 1 Burst Left : 3
+Scheduler: Time Now: 4 seconds. Process Running : 1 Burst Left : 2
+Scheduler: Time Now: 5 seconds. Process Running : 1 Burst Left : 1
+Scheduler: Time Now: 6 seconds. Process Running : 1 Burst Left : 0
+Scheduler: Terminating Process 1 with Remaining Time : 0 
+Process 1: my PID is <1508>: I am terminating.Largest prime I found is 1096500433. 
+Scheduler: Starting Process 3 with Remaining Time : 4 
+Process 3: my PID is <1509>: I just got started.I am starting with the number 1306950492 to find the next prime number.
+Scheduler: Time Now: 7 seconds. Process Running : 3 Burst Left : 3
+Scheduler: Suspending Process 3 with Remaining Time : 3 
+Scheduler: Starting Process 4 with Remaining Time : 2 
+Process 3: my PID is <1509>: I am suspending.Largest prime I found is 1306950492. 
+Process 4: my PID is <1511>: I just got started.I am starting with the number 1408409733 to find the next prime number.
+Scheduler: Time Now: 8 seconds. Process Running : 4 Burst Left : 1
+Scheduler: Time Now: 9 seconds. Process Running : 4 Burst Left : 0
+Scheduler: Terminating Process 4 with Remaining Time : 0 
+Process 4: my PID is <1511>: I am terminating.Largest prime I found is 1408409733. 
+Scheduler: Restarting Process 3 with Remaining Time : 3 
+Process 3: my PID is <1509>: I am restarting.Largest prime I found is 1306950492.
+Scheduler: Time Now: 10 seconds. Process Running : 3 Burst Left : 2
+Scheduler: Time Now: 11 seconds. Process Running : 3 Burst Left : 1
+Scheduler: Time Now: 12 seconds. Process Running : 3 Burst Left : 0
+Scheduler: Terminating Process 3 with Remaining Time : 0 
+Process 3: my PID is <1509>: I am terminating.Largest prime I found is 1306950492. 
+Scheduler: Restarting Process 0 with Remaining Time : 6 
+Process 0: my PID is <1507>: I am restarting.Largest prime I found is 1596466577.
+Scheduler: Time Now: 13 seconds. Process Running : 0 Burst Left : 5
+Scheduler: Time Now: 14 seconds. Process Running : 0 Burst Left : 4
+Scheduler: Time Now: 15 seconds. Process Running : 0 Burst Left : 3
+Scheduler: Time Now: 16 seconds. Process Running : 0 Burst Left : 2
+Scheduler: Time Now: 17 seconds. Process Running : 0 Burst Left : 1
+Scheduler: Time Now: 18 seconds. Process Running : 0 Burst Left : 0
+Scheduler: Terminating Process 0 with Remaining Time : 0 
+Process 0: my PID is <1507>: I am terminating.Largest prime I found is 1596466577. 
+Scheduler: Starting Process 2 with Remaining Time : 6 
+Process 2: my PID is <1816>: I just got started.I am starting with the number 1836444164 to find the next prime number.
+Scheduler: Time Now: 19 seconds. Process Running : 2 Burst Left : 5
+Scheduler: Time Now: 20 seconds. Process Running : 2 Burst Left : 4
+Scheduler: Time Now: 21 seconds. Process Running : 2 Burst Left : 3
+Scheduler: Time Now: 22 seconds. Process Running : 2 Burst Left : 2
+Scheduler: Time Now: 23 seconds. Process Running : 2 Burst Left : 1
+Scheduler: Time Now: 24 seconds. Process Running : 2 Burst Left : 0
+Scheduler: Terminating Process 2 with Remaining Time : 0 
+Process 2: my PID is <1816>: I am terminating.Largest prime I found is 1836444164. 
+osc@ubuntu:~/BolarKonopka2$
+

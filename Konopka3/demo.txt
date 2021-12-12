@@ -1,0 +1,169 @@
+osc@ubuntu:~/BoloarKonopka3$gcc main.c gameParlor.c -o program -lpthread
+osc@ubuntu:~/BoloarKonopka3$./program
+Front Desk: I have 8 dice available
+Group 3: Requesting 5 dice for Risk.
+Group 3: We are playing our first game of Risk
+Group 3: We are done playing our first game of Risk
+Returning 5 dice.
+Group 3: Requesting 5 dice for Risk.
+Group 3: We are playing our second game of Risk
+Group 3: We are done playing our second game of Risk
+Returning 5 dice.
+Group 3: Requesting 5 dice for Risk.
+Group 3: We are playing our third game of Risk
+Group 3: We are done playing our third game of Risk
+Returning 5 dice.
+Group 3: Requesting 5 dice for Risk.
+Group 1: Requesting 4 dice for Backgammon.
+Group 2: Requesting 4 dice for Backgammon.
+Group 7: Requesting 1 die for Pictionary.
+Group 7: We are playing our first game of Pictionary
+Group 3: We are playing our forth game of Risk
+Group 6: Requesting 2 dice for Monopoly.
+Group 6: We are playing our first game of Monopoly
+Group 6: We are done playing our first game of Monopoly
+Returning 2 dice.
+Group 6: Requesting 2 dice for Monopoly.
+Group 6: We are playing our second game of Monopoly
+Group 6: We are done playing our second game of Monopoly
+Returning 2 dice.
+Group 6: Requesting 2 dice for Monopoly.
+Group 6: We are playing our third game of Monopoly
+Group 6: We are done playing our third game of Monopoly
+Returning 2 dice.
+Group 6: Requesting 2 dice for Monopoly.
+Group 6: We are playing our forth game of Monopoly
+Group 5: Requesting 2 dice for Monopoly.
+Group 5: We are playing our first game of Monopoly
+Group 5: We are done playing our first game of Monopoly
+Returning 2 dice.
+Group 5: Requesting 2 dice for Monopoly.
+Group 8: Requesting 1 die for Pictionary.
+Group 8: We are playing our first game of Pictionary
+Group 8: We are done playing our first game of Pictionary
+Returning 1 die.
+Group 3: We are done playing our forth game of Risk
+Returning 5 dice.
+Group 6: We are done playing our forth game of Monopoly
+Returning 2 dice.
+Group 2: We are playing our first game of Backgammon
+Group 4: Requesting 5 dice for Risk.
+Group 7: We are done playing our first game of Pictionary
+Returning 1 die.
+Group 7: Requesting 1 die for Pictionary.
+Group 7: We are playing our second game of Pictionary
+Group 7: We are done playing our second game of Pictionary
+Returning 1 die.
+Group 7: Requesting 1 die for Pictionary.
+Group 7: We are playing our third game of Pictionary
+Group 7: We are done playing our third game of Pictionary
+Returning 1 die.
+Group 7: Requesting 1 die for Pictionary.
+Group 7: We are playing our forth game of Pictionary
+Group 7: We are done playing our forth game of Pictionary
+Returning 1 die.
+Group 7: Requesting 1 die for Pictionary.
+Group 7: We are playing our fifth game of Pictionary
+Group 7: We are done playing our fifth game of Pictionary
+Returning 1 die.
+Group 8: Requesting 1 die for Pictionary.
+Group 8: We are playing our second game of Pictionary
+Group 8: We are done playing our second game of Pictionary
+Returning 1 die.
+Group 8: Requesting 1 die for Pictionary.
+Group 8: We are playing our third game of Pictionary
+Group 8: We are done playing our third game of Pictionary
+Returning 1 die.
+Group 4: We are playing our first game of Risk
+Group 4: We are done playing our first game of Risk
+Returning 5 dice.
+Group 4: Requesting 5 dice for Risk.
+Group 4: We are playing our second game of Risk
+Group 4: We are done playing our second game of Risk
+Returning 5 dice.
+Group 4: Requesting 5 dice for Risk.
+Group 4: We are playing our third game of Risk
+Group 4: We are done playing our third game of Risk
+Returning 5 dice.
+Group 4: Requesting 5 dice for Risk.
+Group 4: We are playing our forth game of Risk
+Group 4: We are done playing our forth game of Risk
+Returning 5 dice.
+Group 4: Requesting 5 dice for Risk.
+Group 4: We are playing our fifth game of Risk
+Group 4: We are done playing our fifth game of Risk
+Returning 5 dice.
+Group 8: Requesting 1 die for Pictionary.
+Group 8: We are playing our forth game of Pictionary
+Group 8: We are done playing our forth game of Pictionary
+Returning 1 die.
+Group 8: Requesting 1 die for Pictionary.
+Group 8: We are playing our fifth game of Pictionary
+Group 8: We are done playing our fifth game of Pictionary
+Returning 1 die.
+Group 5: We are playing our second game of Monopoly
+Group 5: We are done playing our second game of Monopoly
+Returning 2 dice.
+Group 5: Requesting 2 dice for Monopoly.
+Group 5: We are playing our third game of Monopoly
+Group 5: We are done playing our third game of Monopoly
+Returning 2 dice.
+Group 5: Requesting 2 dice for Monopoly.
+Group 5: We are playing our forth game of Monopoly
+Group 5: We are done playing our forth game of Monopoly
+Returning 2 dice.
+Group 5: Requesting 2 dice for Monopoly.
+Group 5: We are playing our fifth game of Monopoly
+Group 5: We are done playing our fifth game of Monopoly
+Returning 2 dice.
+Front Desk: I have 0 dice available
+Group 1: We are playing our first game of Backgammon
+Group 1: We are done playing our first game of Backgammon
+Returning 4 dice.
+Group 1: Requesting 4 dice for Backgammon.
+Group 1: We are playing our second game of Backgammon
+Group 1: We are done playing our second game of Backgammon
+Returning 4 dice.
+Group 1: Requesting 4 dice for Backgammon.
+Group 1: We are playing our third game of Backgammon
+Group 1: We are done playing our third game of Backgammon
+Returning 4 dice.
+Group 6: Requesting 2 dice for Monopoly.
+Group 6: We are playing our fifth game of Monopoly
+Group 6: We are done playing our fifth game of Monopoly
+Returning 2 dice.
+Group 1: Requesting 4 dice for Backgammon.
+Group 1: We are playing our forth game of Backgammon
+Group 1: We are done playing our forth game of Backgammon
+Returning 4 dice.
+Group 1: Requesting 4 dice for Backgammon.
+Group 1: We are playing our fifth game of Backgammon
+Group 1: We are done playing our fifth game of Backgammon
+Returning 4 dice.
+Front Desk: I have 0 dice available
+Group 2: We are done playing our first game of Backgammon
+Returning 4 dice.
+Group 2: Requesting 4 dice for Backgammon.
+Group 2: We are playing our second game of Backgammon
+Group 2: We are done playing our second game of Backgammon
+Returning 4 dice.
+Group 2: Requesting 4 dice for Backgammon.
+Group 2: We are playing our third game of Backgammon
+Group 2: We are done playing our third game of Backgammon
+Returning 4 dice.
+Group 2: Requesting 4 dice for Backgammon.
+Group 2: We are playing our forth game of Backgammon
+Group 2: We are done playing our forth game of Backgammon
+Returning 4 dice.
+Group 2: Requesting 4 dice for Backgammon.
+Group 2: We are playing our fifth game of Backgammon
+Group 3: Requesting 5 dice for Risk.
+Group 3: We are playing our fifth game of Risk
+Group 3: We are done playing our fifth game of Risk
+Returning 5 dice.
+Front Desk: I have 6 dice available
+Group 2: We are done playing our fifth game of Backgammon
+Returning 4 dice.
+
+All the groups have played their games!
+osc@ubuntu:~/BoloarKonopka3$
