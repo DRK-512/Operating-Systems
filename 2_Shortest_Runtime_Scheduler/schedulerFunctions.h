@@ -1,3 +1,6 @@
+#ifndef schedulerFunctions
+#define schedulerFunctions
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,8 +26,9 @@ void scheduleHandler(int signum);
 PIDData findSmallestPID();
 void checkBurst();
 
-int totalTimeValue;
-PIDData data[100];
-int dataSize;
-pid_t children[10];
+extern int totalTimeValue;
+extern PIDData data[100];
+extern int dataSize;
+extern pid_t children[10];
 
+#endif

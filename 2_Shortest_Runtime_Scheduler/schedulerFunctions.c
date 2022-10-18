@@ -2,13 +2,17 @@
 
 // the current running child
 int running_child = -1;
+int totalTimeValue;
+PIDData data[100];
+int dataSize;
+pid_t children[10];
 
 /*
-Function Name: createData
-Input to the method: input file
-Output(Return value): none
-Brief description of the task: This function takes the data from the input file, and 
-puts it into the data struct we created
+    Function Name: createData
+    Input to the method: input file
+    Output(Return value): none
+    Brief description of the task: This function takes the data from the input file, and 
+    puts it into the data struct we created
  */
 // this will setup our data struct using the inputs from the file
 void createData(FILE* file) { 

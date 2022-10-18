@@ -6,6 +6,11 @@
     Output(Return value): prime (Prime number if prime, or 0 if not)
     Brief description of the task: This will check if a number is prime, then return it if it is
 */
+
+long unsigned int calculatedPrime;
+int process_num;
+pid_t pid;
+
 int checkPrimeAndPrint(unsigned long int toCheck){
       unsigned long int i = 2; 
       int prime = 1; 
@@ -27,16 +32,16 @@ void sigHandler(int signum){
     // look at what kind of signal we have so we can do the appropriate operation 
     switch(signum){
         case SIGTSTP:
-          printf("Process %d: my PID is <%d>: I am suspending." , process_num, pid); 
+          printf("Process %d: my PID is <%d>: I am suspending.\n" , process_num, pid); 
           printf("Largest prime I found is %lu. \n", calculatedPrime);
           pause();
           break;
         case SIGCONT:
-          printf("Process %d: my PID is <%d>: I am restarting.", process_num, pid); 
+          printf("Process %d: my PID is <%d>: I am restarting.\n", process_num, pid); 
           printf("Largest prime I found is %lu.\n", calculatedPrime);
           break;
         case SIGTERM:
-          printf("Process %d: my PID is <%d>: I am terminating.", process_num, pid); 
+          printf("Process %d: my PID is <%d>: I am terminating.\n", process_num, pid); 
           printf("Largest prime I found is %lu. \n", calculatedPrime);
           exit(EXIT_SUCCESS);
           break;

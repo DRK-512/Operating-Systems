@@ -1,14 +1,10 @@
-/*
-    Author:Darek Konopka & Tejas Bolar
-    Assignment Number:2
-    Date of Submission:11/10/2021
-    Name of this file:main.c
-    Description of the program: The program was designed to simulate a 
-    shortest remaining time first scheduler, using parameters from an input file
- */
-
 #include "schedulerFunctions.h"
 
+/*
+    Description of the program: The program was designed to simulate a 
+    shortest remaining time first scheduler, using parameters from an input file, 
+    and the prime.c main function as a child process
+*/
 int main(int argc, char *argv[]){ 
 
     // Get the input file 
