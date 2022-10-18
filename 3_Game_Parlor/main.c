@@ -1,3 +1,4 @@
+#include "gameParlor.h"
 
 /* 
     Author: Darek Konopka & Tejas Bolar 
@@ -8,12 +9,8 @@
     game parlor with the use of threads and semaphores
 */
 
-
-#include "gameParlor.h"
-
 // Here we import these from the gameParloc.h
-extern sem_t Pictionary,Monopoly,Backgammon,Risk,mutex; ; // semaphore for mutex & games
-
+sem_t Pictionary,Monopoly,Backgammon,Risk,mutex; ; // semaphore for mutex & games
 
 int main() {
     // semaphores have a return value for error checking, so we decided to throw that in 

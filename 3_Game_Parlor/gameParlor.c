@@ -1,5 +1,3 @@
-
-
 #include "gameParlor.h"
 
 int repeatFix = 1; // to fix repeated front desks
@@ -110,7 +108,7 @@ void* gameParlor(void* gameID) {
                 requestDice[gameGroupID]=4;
                 repeatFix=1; 
                 // this is backgammon
-                printf("Group %d: Requesting 4 dice for Backgammon.\n", retVal);
+                printf("Group %d: Requesting 4 dice for Backgammon\n", retVal);
                 
                 
                 sem_trywait(&Backgammon);
@@ -132,7 +130,7 @@ void* gameParlor(void* gameID) {
                 requestDice[gameGroupID]=5; 
                 repeatFix=1; 
                 // this is risk
-                printf("Group %d: Requesting 5 dice for Risk.\n", retVal);
+                printf("Group %d: Requesting 5 dice for Risk\n", retVal);
                 
 
                 sem_trywait(&Risk);
@@ -154,7 +152,7 @@ void* gameParlor(void* gameID) {
                 requestDice[gameGroupID]=2; 
                 repeatFix=1; 
                 // this is monopoly
-                printf("Group %d: Requesting 2 dice for Monopoly.\n", retVal);
+                printf("Group %d: Requesting 2 dice for Monopoly\n", retVal);
                 
                 sem_trywait(&Monopoly);
                 printMesssage(1, gameGroupID);
@@ -175,7 +173,7 @@ void* gameParlor(void* gameID) {
                 requestDice[gameGroupID]=1; 
                 repeatFix=1; 
                 // this is pictionary 
-                printf("Group %d: Requesting 1 die for Pictionary.\n", retVal);
+                printf("Group %d: Requesting 1 die for Pictionary\n", retVal);
                
                 sem_trywait(&Pictionary);
                 printMesssage(1, gameGroupID);
