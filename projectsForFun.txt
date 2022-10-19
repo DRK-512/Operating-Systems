@@ -1,0 +1,16 @@
+## Other Problems for Fun: 
+Producer Consumer: az
+https://www.geeksforgeeks.org/producer-consumer-problem-using-semaphores-set-1/?ref=lbp
+
+Dining Philosophers: 
+https://www.geeksforgeeks.org/dining-philosopher-problem-using-semaphores/
+
+Sleeping Barber: 
+https://www.geeksforgeeks.org/sleeping-barber-problem-in-process-synchronization/?ref=lbp
+
+Reader Writier: 
+https://www.geeksforgeeks.org/readers-writers-problem-set-1-introduction-and-readers-preference-solution/?ref=lbp
+
+Github pages with more OS problems:
+https://github.com/TytanRock/CS-451/tree/master/
+https://github.com/frap129/CS451
