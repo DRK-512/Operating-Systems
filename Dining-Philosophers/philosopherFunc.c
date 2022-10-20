@@ -1,88 +1,70 @@
 #include "philosopherFunc.h"
  
-int state[N];
-int phil[N] = { 0, 1, 2, 3, 4 };
+int state[maxPhil];
  
 sem_t mutex;
-sem_t S[N];
+sem_t philSem[maxPhil];
  
-void test(int phnum)
-{
-    if (state[phnum] == HUNGRY
-        && state[LEFT] != EATING
-        && state[RIGHT] != EATING) {
-        // state that eating
-        state[phnum] = EATING;
- 
+// philNum is which philosopher we are taking about now
+void test(int philNum) {
+    // check if chopsticks are available
+    if (state[philNum] == hung && state[left] != eat && state[right] != eat) {
+        // since chopsticks are avalibale, the philospher will start eating
+        state[philNum] = eat;
         sleep(2);
- 
-        printf("Philosopher %d takes fork %d and %d\n",
-                      phnum + 1, LEFT + 1, phnum + 1);
- 
-        printf("Philosopher %d is Eating\n", phnum + 1);
- 
-        // sem_post(&S[phnum]) has no effect
-        // during takefork
-        // used to wake up hungry philosophers
-        // during putfork
-        sem_post(&S[phnum]);
+
+        sem_post(&philSem[philNum]);
+        printf("Philosopher %d takes chopsticks %d and %d\n", philNum + 1, left + 1, philNum + 1); 
+        printf("Philosopher %d is now Eating\n", philNum + 1);
     }
 }
  
-// take up chopsticks
-void take_fork(int phnum)
-{
- 
+// pickup chopsticks
+void take_chopstick(int philNum) {
+    
     sem_wait(&mutex);
  
-    // state that hungry
-    state[phnum] = HUNGRY;
+    // once mutex done waiting, the philosopher is hungry
+    state[philNum] = hung;
+
+    printf("Philosopher %d is Hungry\n", philNum + 1);
  
-    printf("Philosopher %d is Hungry\n", phnum + 1);
- 
-    // eat if neighbours are not eating
-    test(phnum);
+    // check if we can eat
+    test(philNum);
  
     sem_post(&mutex);
  
-    // if unable to eat wait to be signalled
-    sem_wait(&S[phnum]);
+    // if we cant eat, wait until chopsticks are availble 
+    sem_wait(&philSem[philNum]);
  
     sleep(1);
 }
  
 // put down chopsticks
-void put_fork(int phnum)
-{
+void place_chopstick(int philNum) {
  
     sem_wait(&mutex);
  
-    // state that thinking
-    state[phnum] = THINKING;
+    // we are now placing our chopsticks to think
+    state[philNum] = think;
  
-    printf("Philosopher %d putting fork %d and %d down\n",
-           phnum + 1, LEFT + 1, phnum + 1);
-    printf("Philosopher %d is thinking\n", phnum + 1);
+    printf("Philosopher %d putting chopsticks %d and %d down\n", philNum + 1, left + 1, philNum + 1);
+    printf("Philosopher %d is thinking\n", philNum + 1);
  
-    test(LEFT);
-    test(RIGHT);
+    // let left are right know chopsticks are availble
+    test(left);
+    test(right);
  
     sem_post(&mutex);
 }
  
-void* philosopher(void* num)
-{
- 
+// this is the philosopher who takes the chopsitck, eats, then places the chopstick
+void* philosopher(void* num) {
     while (1) {
- 
         int* i = num;
- 
         sleep(1);
- 
-        take_fork(*i);
- 
+        take_chopstick(*i);
         sleep(0);
- 
-        put_fork(*i);
+        place_chopstick(*i);
     }
 }
