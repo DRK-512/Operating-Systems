@@ -7,7 +7,4 @@
 #include <pthread.h>
 #include <semaphore.h>
 
-// semaphores for each game
-extern sem_t Pictionary, Monopoly, Backgammon, Risk; 
-
 #endif

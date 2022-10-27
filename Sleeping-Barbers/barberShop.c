@@ -11,26 +11,25 @@ void *barber(void *param) {
    int worktime;
   
    while(1) {
-     // waiting for a customer to become available
-	  sem_wait(&sem_customer);
-     // waiting for a chair to become available, then increment the chair
-	  sem_wait(&chairs_mutex);
-	  num_chairs += 1;
-	  if(num_chairs==1){
-	  	printf("The Barber is taking in a customer\nThere is %d chair available\n",num_chairs);
-	  } else {
-		printf("The Barber is taking in a customer\nThere are %d chairs available\n",num_chairs);
-	  }
-	  
-     
-     // let customer know that the seat is empty, then lock the chair
-	  sem_post(&sem_barber);
-	  sem_post(&chairs_mutex);
+		// waiting for a customer to become available
+		sem_wait(&sem_customer);
+		// waiting for a chair to become available, then increment the chair
+		sem_wait(&chairs_mutex);
+		num_chairs += 1;
+		if(num_chairs==1){
+			printf("The Barber is taking in a customer\nThere is %d chair available\n",num_chairs);
+		} else {
+			printf("The Barber is taking in a customer\nThere are %d chairs available\n",num_chairs);
+		}
 
-     // create random number for worktime (from 1-5 seconds) for length of time to cut the hair. 
-	  worktime = (rand() % 5) + 1;
-	  printf("The Barber is cutting hair for %d seconds\n", worktime);
-	  sleep(worktime);
+		// let customer know that the seat is empty, then lock the chair
+		sem_post(&sem_barber);
+		sem_post(&chairs_mutex);
+
+		// create random number for worktime (from 1-5 seconds) for length of time to cut the hair. 
+		worktime = (rand() % 5) + 1;
+		printf("The Barber is cutting hair for %d seconds\n", worktime);
+		sleep(worktime);
     } 
 }
 
@@ -58,9 +57,9 @@ void *customer(void *param) {
 		   // after they wait, the barber can cut their hair
 		   printf("Client %lu is getting their haircut\n",pthread_self());
 		} else {
- 			// free mutex lock on chair count, because our customer was impatient
-		   printf("Client %lu is leaving without a haircut\n", pthread_self());
-		   sem_post(&chairs_mutex);
+			// free mutex lock on chair count, because our customer was impatient
+			printf("Client %lu is leaving without a haircut\n", pthread_self());
+			sem_post(&chairs_mutex);
 		}
 
 		// generate random number for the waittime, 

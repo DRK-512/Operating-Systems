@@ -2,8 +2,8 @@
 
 int main() {
 
-      // set global and local varibles
-      num_chairs = 5; // we have 5 chairs in our barber shop 
+	// set global and local varibles
+	num_chairs = 5; // we have 5 chairs in our barber shop 
 	haircutTime = 2; // customers will wait 2
 	int sleepTime = 4; // it takes us 4 to cut someones hair
 	int customers = 8; // we have 8 people wanting haircuts
@@ -19,8 +19,8 @@ int main() {
 	printf("Creating barber with ID: %lu\n",barberID);
 
 	// Create threads for customers
-      pthread_t customerIDs[20]; 
-      int i; 
+	pthread_t customerIDs[20]; 
+	int i; 
 	for (i = 0; i < customers; i++) {
       	pthread_create(&customerIDs[i], NULL, customer, NULL);
             printf("Creating customer with ID: %lu\n",customerIDs[i]);

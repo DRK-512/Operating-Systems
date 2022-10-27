@@ -6,27 +6,25 @@
     each game has a different number of dice, and so we have to keep track of how many 
     dice the game parlor has at a time so we know if people can play a game
 */
-#define numDie 8
+
 int main() {
 
-    // create threads and initalize the mutex
-    pthread_t gameGroup[numDie+1];
+    // create semaphores for the dice 
+    num_dice=8;
+    sem_init(&dice_mutex, 0, 8); // only the parlor can know how many dice are availble, so that is why we have 0 
+    
+    // create you parlor thread
+    pthread_t parlorID; 
+    pthread_create(&parlorID, NULL, parlor, NULL); 
 
-    // array of threads (-1 is for the front desk)
-    static int gameTypes[] = {-1, 0, 1, 2, 3, 4, 5, 6, 7};
- 
-    // create threads for each game
+    // create all the game threads   
     int i; 
-    for (i = 0; i < 9; i++) {
-        pthread_create(&gameGroup[i], NULL, gameParlor, &gameTypes[i]);
+    for(i=0; i<8;i++){
+        pthread_create(&gameID[i],NULL,game,NULL);
     }
 
-    // join all gamer groups
-    for (int i = 0; i <9; i++){
-        pthread_join(gameGroup[i], NULL);
-    }
-
-    return 0;
+    free(gCount); 
+    return 0; 
 }
 
 
