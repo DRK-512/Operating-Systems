@@ -81,20 +81,20 @@ available whenever number of dice it holds changes.
 
 For example, a sample run might look like the following:
 
-*Front Desk: I have 8 dice available*
-*Group 1: Requesting 4 dice for Backgammon.*
-*Group 1: We are playing our first game of Backgammon*
-*Front Desk: I have 4 dice available*
-*Group 3: Requesting 3 dice for Risk.*
-*Group 3: We are playing our first game of Risk*
-*Front Desk: I have 1 dice available*
-*Group 2: Requesting 4 dice for Backgammon*
-*Group 1: We are done playing our first game of Backgammon.* 
-*Returning 4 dice.*
-*Front Desk: I have 5 dice available*
-*Group 2: We are playing our first game of Backgammon*
-*Front Desk: I have 1 dice available*
-*Etc. etc.*
+*Front Desk: I have 8 dice available*<br>
+*Group 1: Requesting 4 dice for Backgammon.*<br>
+*Group 1: We are playing our first game of Backgammon*<br>
+*Front Desk: I have 4 dice available*<br>
+*Group 3: Requesting 3 dice for Risk.*<br>
+*Group 3: We are playing our first game of Risk*<br>
+*Front Desk: I have 1 dice available*<br>
+*Group 2: Requesting 4 dice for Backgammon*<br>
+*Group 1: We are done playing our first game of Backgammon.* <br>
+*Returning 4 dice.*<br>
+*Front Desk: I have 5 dice available*<br>
+*Group 2: We are playing our first game of Backgammon*<br>
+*Front Desk: I have 1 dice available*<br>
+*Etc. etc.*<br>
 
 
 - Your output order may vary from the above depending on the random game time, and, order of execution of the threads. 
