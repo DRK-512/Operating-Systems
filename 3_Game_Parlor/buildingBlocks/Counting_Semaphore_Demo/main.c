@@ -6,7 +6,7 @@
 
 /*
 	The purpose of this program is show how to run a number of threads with a counting semaphore
-	NOTES:  With gcc please run with -lpthread
+	NOTES: 	With gcc please run with -lpthread
 			This is building block 1/3 for the game parlor project
 			What this program does is that it creates 8 threads, and prints that threads message onto the terminal
 */
@@ -20,7 +20,7 @@ sem_t sema;
 int main() {
 
 	pthread_t threads[numT]; // threads we use for testing
-	long i; // made long because pthread_create(x,x,x,VALUE) is expected to be along
+	long i; // made long because pthread_create(x,x,x,VALUE) is expected to be a long
 	int pError; // pthreads return value, and the return states if an error as occured 
 	
 	sem_init(&sema, 0, threadLimit); 
@@ -35,7 +35,6 @@ int main() {
 	messages[7] = "Latin: Salve Mundus!";
 
 	for(i=0;i<numT;i++) {
-	
 		// if pthread does not return 0, we have problems
 		pError = pthread_create(&threads[i], NULL, printMessage, (void *) i);
 		if (pError) {
@@ -43,17 +42,20 @@ int main() {
 			exit(-1);
 		}
 	}
-
 	pthread_exit(NULL);
 }
 
 void *printMessage(void *threadid) {
 
 	long taskid = (long) threadid;
-	 
+	
+	// Once we have a semaphore, we "run the process" aka make it sleep 
 	sem_wait(&sema); 
 	printf("Thread %ld: %s\n", taskid, messages[taskid]);
 	sleep(1); 
+	
+	// Once done with the process (or sleep) we free the semaphore, and free the thread
 	sem_post(&sema); 
 	pthread_exit(NULL);
+	
 }
