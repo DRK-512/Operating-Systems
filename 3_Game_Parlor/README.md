@@ -126,16 +126,14 @@ pthread _t thread_id[5];
 for (int i =O; i <5; itt)
 pthread create (&thread id [i], NULL, thread task, (void *) i);
 
-// The following code makes sure the main program waits until all threads
-have finished execution
+// The following code makes sure the main program waits until all threads have finished execution
 
 for (int i =O; i <5; i++)
 pthread_join(thread_id[i], NULL);
 void thread_task(int i) {
 //Code for the thread task goes here
 
-pthread_exit(0); // this code returns to the corresponding pthread_join
-issued in main()
+pthread_exit(0); // this code returns to the corresponding pthread_join issued in main()
 }
 ```
 
