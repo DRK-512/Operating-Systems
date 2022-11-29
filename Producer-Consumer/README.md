@@ -1,14 +1,11 @@
-# Operating-Systems
+# Producer Consumer Problem
+The producer-consumer problem in C is one of the most famous problems associated with operating systems.
 
-This repository consists of Operating System projects I have done for fun, or for my Operating Systems class for Kettering
-Folders beginning with a number were assigned to me, wheras the others I did out of leisure
-- 1_Own_PS_Program: A better version of the ps -aux | grep function
-- 2_Shortest_Runtime_Scheduler: Simuilation of a shorest runtime scheudler with the use of a child as the process
-- 3_Game_Parlor: A simulated game parlor, where the parlor has 8 dice, and each game costs a number of dice
-- 4_Virtual_Memory_Manager: A program that allocates, deallocates, and compacts memory as the user requests
-- Dining-Philosophers: The Dining Philosopher Problem states that K philosophers seated around a circular table with one chopstick between each pair of philosophers. There is one chopstick between each philosopher. A philosopher may eat if he can pick up the two chopsticks adjacent to him. One chopstick may be picked up by any one of its adjacent followers but not both. 
-- Elevator-Threading: A simulated elavator system, where the people are the threads
-- Priority-Scheduler: Simuilation of a scheudler which runs processes by priority
-- Reader-Writer: A situation where we have a file shared between many people, and many can read at once, but only one can write at a time 
-- Sleeping-Barbers: There is a barber shop which has one barber, one barber chair, and n chairs for waiting for customers if there are any to sit on the chair.
+In the producer-consumer problem in C, there is a producer which produces data and there is a consumer that consumes the data produced by the producer. Now, in the producer-consumer problem in C, there is a buffer. A buffer is a temporary storage area in the memory that stores data. The buffer in the Producer-Consumer Problem in C contains the produced items by the producer. The consumer consumes the products from the same buffer. In simpler terms, we can say that the buffer is a shared space between the producer and consumer.
 
+Here are the roles of each thread: 
+- Producer: Produces data to be put into the buffer
+- Consumer: Consumes the data produced by the producer, and that is stored in the buffer
+
+In our example we have 1 Producer and 3 Consumers
+- The thing is, each consumer consumes a different amount of data

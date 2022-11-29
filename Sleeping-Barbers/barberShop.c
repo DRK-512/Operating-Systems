@@ -33,9 +33,9 @@ void *barber(void *param) {
     } 
 }
 
-void *customer(void *param) {
+void *customer(void *threadid) {
    int waittime;
-
+	long taskid = (long) threadid;
    while(1) {
 		// wait for chairs to be avalible 
 		sem_wait(&chairs_mutex);
@@ -44,9 +44,9 @@ void *customer(void *param) {
 
 		   num_chairs -= 1;
 		   if(num_chairs==1){
-	  			printf("Client %lu is sitting in the waiting room\nThere is %d chair left\n",pthread_self(),num_chairs);
+	  			printf("Client %ld is sitting in the waiting room\nThere is %d chair left\n",taskid,num_chairs);
 	  		} else {
-				printf("Client %lu is sitting in the waiting room\nThere are %d chairs left\n",pthread_self(),num_chairs);
+				printf("Client %ld is sitting in the waiting room\nThere are %d chairs left\n",taskid,num_chairs);
 	  		}
 		   // signal that a customer is ready 
 		   sem_post(&sem_customer);
@@ -55,10 +55,10 @@ void *customer(void *param) {
 		   // wait for barber to be ready to cut their hair
 		   sem_wait(&sem_barber);
 		   // after they wait, the barber can cut their hair
-		   printf("Client %lu is getting their haircut\n",pthread_self());
+		   printf("Client %ld is getting their haircut\n",taskid);
 		} else {
 			// free mutex lock on chair count, because our customer was impatient
-			printf("Client %lu is leaving without a haircut\n", pthread_self());
+			printf("Client %ld is leaving without a haircut\n", taskid);
 			sem_post(&chairs_mutex);
 		}
 
@@ -66,7 +66,7 @@ void *customer(void *param) {
 		waittime = (rand() % haircutTime) + 1;
 		
 		// sleep for waittime seconds 
-		printf("Client %lu is waiting %d seconds before attempting another haircut\n",pthread_self(),waittime);
+		printf("Client %lu is waiting %d seconds before attempting another haircut\n",taskid,waittime);
 		sleep(waittime);
 	}
 }

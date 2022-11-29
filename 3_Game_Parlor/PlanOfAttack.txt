@@ -23,8 +23,8 @@ The barber shop example should help with this problem, here are some comparisons
 
 Before you start, please complete the following tasks to use as building blocks for this project: 
 1. Make a function that is able to run a number of threads with a counting semaphore (DONE)
-2. Take 1. and now each thread ask for a different # of semaphores to use / signal
-3. Now take 2. except each thread has to have run at least 3x
+2. Take 1. and now each thread ask for a different # of semaphores to use / signal (IN PROGRESS) 
+3. Now take 2. except each thread has to have run at least 3x 
 
 Once you figure the building block problems out, finishing the game parlor problem should not be too difficult
 

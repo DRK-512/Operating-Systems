@@ -20,10 +20,10 @@ int main() {
 
 	// Create threads for customers
 	pthread_t customerIDs[20]; 
-	int i; 
+	long i; 
 	for (i = 0; i < customers; i++) {
-      	pthread_create(&customerIDs[i], NULL, customer, NULL);
-            printf("Creating customer with ID: %lu\n",customerIDs[i]);
+      	pthread_create(&customerIDs[i], NULL, customer, (void *) i);
+        printf("Creating customer with ID: %ld\n",i);
 	}
 
 	// Sleep

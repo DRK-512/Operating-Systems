@@ -14,5 +14,5 @@ extern int num_chairs;
 extern int haircutTime;
 
 void *barber(void *param); 
-void *customer(void *param); 
+void *customer(void *threadid); 
 #endif
