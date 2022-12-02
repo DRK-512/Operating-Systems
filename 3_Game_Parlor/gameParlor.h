@@ -7,4 +7,11 @@
 #include <pthread.h>
 #include <semaphore.h>
 
+
+void *parlor(void *param); 
+void *game(void *param); 
+
+extern sem_t empty, full; 
+extern pthread_mutex_t mutex;
+
 #endif

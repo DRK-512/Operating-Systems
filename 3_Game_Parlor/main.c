@@ -7,25 +7,43 @@
     dice the game parlor has at a time so we know if people can play a game
 */
 
+// NOTE: here we make sure all games finish before starting the next round
+// the reason for this is because it would take more memory to make pictionaries's 3rd x to compete with monopolies 1st x
 int main() {
 
-    // create semaphores for the dice 
-    num_dice=8;
-    sem_init(&dice_mutex, 0, 8); // only the parlor can know how many dice are availble, so that is why we have 0 
+    pthread_t gameParlor, group[8];
+
+	// create a semaphore of size 8, and have the game trypost 
+    sem_init(&full, 0, 0);
+    sem_init(&empty, 0, 8);
+    pthread_mutex_init(&mutex, NULL);
     
-    // create you parlor thread
-    pthread_t parlorID; 
-    pthread_create(&parlorID, NULL, parlor, NULL); 
-
-    // create all the game threads   
-    int i; 
-    for(i=0; i<8;i++){
-        pthread_create(&gameID[i],NULL,game,NULL);
+    pthread_create(&gameParlor,NULL,parlor,NULL);
+    long i; 
+    int j; 
+    
+    // we create each thread 5x since each game is played 5x
+    for(j=0; j<5; j++){
+		for(i=0; i<8; i++){
+			// we also pass in the ID of the game so we know which one we are talking about
+		    pthread_create(&group[i], NULL, game, (void*)i);
+		}
+		
+		// here we ensure all games complete before we start the next round of gaming
+		for(i=0; i<8; i++){
+		    pthread_join(group[i],NULL);
+		}
+		printf("All groups have finished their games, time to play again!\n\n");
     }
-
-    free(gCount); 
+   
+   	// now we close the gameparlor
+	pthread_join(gameParlor,NULL);
+    
+    sem_destroy(&full);
+    sem_destroy(&empty);
+    pthread_mutex_destroy(&mutex);
+    
     return 0; 
 }
-
 
 
