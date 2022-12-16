@@ -2,7 +2,7 @@
 
 /* 
     The program is intended to simulate a game parlor with the use of threads and semaphores
-    people go up to the gameparlor to borrow dice for thier game
+    people go up to the gameparlor to borrow a # of dice for thier game
     each game has a different number of dice, and so we have to keep track of how many 
     dice the game parlor has at a time so we know if people can play a game
 */
@@ -14,19 +14,20 @@ int main() {
     pthread_t gameParlor, group[8];
 
 	// create a semaphore of size 8, and have the game trypost 
-    sem_init(&full, 0, 0);
-    sem_init(&empty, 0, 8);
-    pthread_mutex_init(&mutex, NULL);
+    sem_init(&gameDone, 0, 0);
+    sem_init(&canPlay, 0, 0);
+    sem_init(&diceCheck, 0, 1);
     
     pthread_create(&gameParlor,NULL,parlor,NULL);
-    long i; 
-    int j; 
-    
+    char i, j; 
+
     // we create each thread 5x since each game is played 5x
     for(j=0; j<5; j++){
 		for(i=0; i<8; i++){
+            char* id = malloc(sizeof(char)); 
+            *id = i; 
 			// we also pass in the ID of the game so we know which one we are talking about
-		    pthread_create(&group[i], NULL, game, (void*)i);
+		    pthread_create(&group[i], NULL, game, id);
 		}
 		
 		// here we ensure all games complete before we start the next round of gaming
@@ -35,14 +36,18 @@ int main() {
 		}
 		printf("All groups have finished their games, time to play again!\n\n");
     }
-   
+    
+    // no one is playing games anymore 
+    playingGames=0; 
+
    	// now we close the gameparlor
 	pthread_join(gameParlor,NULL);
     
-    sem_destroy(&full);
-    sem_destroy(&empty);
-    pthread_mutex_destroy(&mutex);
-    
+    printf("The game parlor is now closing for the day, thanks for playing!\n");
+
+    sem_destroy(&gameDone);
+    sem_destroy(&canPlay);
+    sem_destroy(&diceCheck);
     return 0; 
 }
 

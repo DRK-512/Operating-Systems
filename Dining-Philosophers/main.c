@@ -14,7 +14,7 @@ int main() {
 	// create threads and initalize the mutex
 	pthread_t thread_id[maxPhil];
 	sem_init(&mutex, 0, 1);
-   int philArr[maxPhil] = { 0, 1, 2, 3, 4 };
+    int philArr[maxPhil] = { 0, 1, 2, 3, 4 };
 
 	int i;
 	for (i = 0; i < maxPhil; i++){

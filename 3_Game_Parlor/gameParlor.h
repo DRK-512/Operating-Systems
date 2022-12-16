@@ -8,10 +8,10 @@
 #include <semaphore.h>
 
 
-void *parlor(void *param); 
+void *parlor(); 
 void *game(void *param); 
 
-extern sem_t empty, full; 
-extern pthread_mutex_t mutex;
+extern sem_t diceCheck, canPlay, gameDone; 
+extern char playingGames; 
 
 #endif
