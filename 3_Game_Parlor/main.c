@@ -7,8 +7,6 @@
     dice the game parlor has at a time so we know if people can play a game
 */
 
-// NOTE: here we make sure all games finish before starting the next round
-// the reason for this is because it would take more memory to make pictionaries's 3rd x to compete with monopolies 1st x
 int main() {
 
     pthread_t gameParlor, group[8];
@@ -40,9 +38,7 @@ int main() {
 		printf("All groups have finished their games, time to play again!\n\n");
     }
     
-    // no one is playing games anymore 
-    playingGames=0; 
-    
+    // no one is playing games anymore  
     printf("The game parlor is now closing for the day, thanks for playing!\n");
 
     sem_destroy(&gameDone);

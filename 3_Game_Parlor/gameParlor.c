@@ -14,16 +14,15 @@ gCount will count the number of games we played
 if the group played 5x, they are no longer allowed to play
 */
 
+#define maxDice 8
 
 sem_t diceCheck, canPlay, gameDone, changeQue, addQue; 
 
-#define maxDice 8
-char playingGames=1, count=0; 
-
-// initalize all to 0 (0 means not in use)
-char available = maxDice; 
+// initalize all to 0 (0 means not in use), and set count to 0
+char count=0; 
 char buffer[8] = {0}; // will hold which team is going 
 
+// returns the number of dice the group needs
 char fetchNumDice(char gameID){
     // find out how many dice we are working with 
     char dice=0; 
@@ -51,8 +50,9 @@ char fetchNumDice(char gameID){
     return dice; 
 }
 
+// returns the name of the game that the group is playing 
 char* getGame(char numDice){
-        // find out how many dice we are working with 
+    // find out how many dice we are working with 
     char* gameName; 
     switch(numDice){
         case 1: 
@@ -79,13 +79,11 @@ char* getGame(char numDice){
 }
 
 void *parlor() {
-    // will repeate int max = (5*(5+4+2+1)); // each game 5x 
-    // probably should lock before we start
-    // check which game is requesting dice, then take (will stay in while until we can)
-    // once game finishes, place dice back 
+
     char i, checkNum; 
+    char available = maxDice;
     printf("Front Desk: I have %d dice available\n", available);
-    while(playingGames){
+    while(1){
         
         sem_wait(&diceCheck);
         
@@ -115,8 +113,7 @@ void *parlor() {
             sem_post(&changeQue);
         } else {
             sem_post(&diceCheck);
-        }
-         
+        }        
     }
 }
 
