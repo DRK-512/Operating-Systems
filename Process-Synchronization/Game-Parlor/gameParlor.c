@@ -16,10 +16,10 @@ if the group played 5x, they are no longer allowed to play
 
 #define maxDice 8
 
-sem_t diceCheck, canPlay, gameDone, changeQue, addQue; 
+sem_t canPlay, gameDone, addQue; 
 
 // initalize all to 0 (0 means not in use), and set count to 0
-char count=0; 
+char count=0, firstGame=0; 
 char buffer[8] = {0}; // will hold which team is going 
 
 // returns the number of dice the group needs
@@ -85,14 +85,10 @@ void *parlor() {
     printf("Front Desk: I have %d dice available\n", available);
     while(1){
         
-        sem_wait(&diceCheck);
-        
         checkNum = fetchNumDice(buffer[0]);
         printf("Group %d is requsting %d for %s\n", buffer[0], checkNum, getGame(buffer[0])); 
         // check if available 
         if(available>=checkNum){
-            sem_post(&diceCheck);
-            sem_wait(&changeQue);
 
             // remove dice from availble 
             available = available-checkNum; 
@@ -110,10 +106,7 @@ void *parlor() {
             // put dice back 
             available = available+checkNum;
 
-            sem_post(&changeQue);
-        } else {
-            sem_post(&diceCheck);
-        }        
+        }       
     }
 }
 
@@ -129,7 +122,12 @@ void *game(void *param) {
     // sem_wait until can play
     sem_wait(&canPlay); 
     // if can play, so youre playing, then sleep
-    printf("Group %d is now playing %s\n", buffer[0], getGame(buffer[0])); 
-    sleep(1);
-    sem_post(&gameDone); 
+    if(firstGame){
+        firstGame=0; 
+    } else {
+        printf("Group %d is now playing %s\n", buffer[0], getGame(buffer[0])); 
+        sleep(1);
+    }
+    
+    sem_post(&gameDone);    
 }

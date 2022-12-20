@@ -14,8 +14,6 @@ int main() {
 	// create a semaphore of size 8, and have the game trypost 
     sem_init(&gameDone, 0, 0);
     sem_init(&canPlay, 0, 0);
-    sem_init(&diceCheck, 0, 1);
-    sem_init(&changeQue, 0, 1);
     sem_init(&addQue, 0, 1);
 
     pthread_create(&gameParlor,NULL,parlor,NULL);
@@ -23,6 +21,7 @@ int main() {
 
     // we create each thread 5x since each game is played 5x
     for(j=0; j<5; j++){
+        
 		for(i=0; i<8; i++){
             char* id = malloc(sizeof(char)); 
             *id = i; 
@@ -34,6 +33,7 @@ int main() {
 		for(i=0; i<8; i++){
 		    pthread_join(group[i],NULL);
 		}
+        firstGame=1; 
         count=0; 
 		printf("All groups have finished their games, time to play again!\n\n");
     }
@@ -43,8 +43,6 @@ int main() {
 
     sem_destroy(&gameDone);
     sem_destroy(&canPlay);
-    sem_destroy(&diceCheck);
-    sem_destroy(&changeQue);
     sem_destroy(&addQue);
     return 0; 
 }

@@ -11,7 +11,7 @@
 void *parlor(); 
 void *game(void *param); 
 
-extern sem_t diceCheck, canPlay, gameDone, changeQue, addQue; 
-extern char count; 
+extern sem_t canPlay, gameDone, addQue; 
+extern char count, firstGame; 
 
 #endif

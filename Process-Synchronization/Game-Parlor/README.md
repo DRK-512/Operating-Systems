@@ -1,5 +1,6 @@
 # The Game Parlor Problem
 **Author: Darek Konopka**
+Credit to [Task 2](http://web.cecs.pdx.edu/~harry/Blitz/version-1-0/OSProject/p3/proj3.pdf)
 
 ### How to compile it
 To compile the code use following command:
