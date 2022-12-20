@@ -17,7 +17,9 @@ int main() {
     sem_init(&gameDone, 0, 0);
     sem_init(&canPlay, 0, 0);
     sem_init(&diceCheck, 0, 1);
-    
+    sem_init(&changeQue, 0, 1);
+    sem_init(&addQue, 0, 1);
+
     pthread_create(&gameParlor,NULL,parlor,NULL);
     char i, j; 
 
@@ -34,20 +36,20 @@ int main() {
 		for(i=0; i<8; i++){
 		    pthread_join(group[i],NULL);
 		}
+        count=0; 
 		printf("All groups have finished their games, time to play again!\n\n");
     }
     
     // no one is playing games anymore 
     playingGames=0; 
-
-   	// now we close the gameparlor
-	pthread_join(gameParlor,NULL);
     
     printf("The game parlor is now closing for the day, thanks for playing!\n");
 
     sem_destroy(&gameDone);
     sem_destroy(&canPlay);
     sem_destroy(&diceCheck);
+    sem_destroy(&changeQue);
+    sem_destroy(&addQue);
     return 0; 
 }
 

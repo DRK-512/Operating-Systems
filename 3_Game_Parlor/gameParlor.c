@@ -15,39 +15,67 @@ if the group played 5x, they are no longer allowed to play
 */
 
 
-sem_t diceCheck, canPlay, gameDone; 
+sem_t diceCheck, canPlay, gameDone, changeQue, addQue; 
 
 #define maxDice 8
-char playingGames=1; 
-char gameID; 
-// initalize all to 0 (0 means not in use)
-char available[maxDice] = {0}; 
+char playingGames=1, count=0; 
 
-char fetchNumDice(){
+// initalize all to 0 (0 means not in use)
+char available = maxDice; 
+char buffer[8] = {0}; // will hold which team is going 
+
+char fetchNumDice(char gameID){
     // find out how many dice we are working with 
     char dice=0; 
     switch(gameID){
-        case 0: 
         case 1: 
+        case 2: 
             dice=4;
             break;  
-        case 2:
-        case 3:  
+        case 3:
+        case 4:  
             dice=5;
             break; 
-        case 4:
-        case 5:  
+        case 5:
+        case 6:  
             dice=2;
             break; 
-        case 6: 
-        case 7:  
+        case 7: 
+        case 8:  
             dice=1;
             break; 
         default: 
-            printf("ERROR: Too many gameID's");
-            exit(1);  
+            // gameID = null, we skip for now
+            break;  
     }   
     return dice; 
+}
+
+char* getGame(char numDice){
+        // find out how many dice we are working with 
+    char* gameName; 
+    switch(numDice){
+        case 1: 
+        case 2: 
+            gameName="Backgammon";
+            break; 
+        case 3:
+        case 4: 
+            gameName="Risk";
+            break; 
+        case 5:
+        case 6:
+            gameName="Monopoly";
+            break; 
+        case 7: 
+        case 8: 
+            gameName="Pictionary"; 
+            break;  
+        default: 
+            gameName=""; 
+            break;  
+    }   
+    return gameName; 
 }
 
 void *parlor() {
@@ -55,54 +83,56 @@ void *parlor() {
     // probably should lock before we start
     // check which game is requesting dice, then take (will stay in while until we can)
     // once game finishes, place dice back 
-    int i, parlorDice;
-    int diceSlots[maxDice]; 
-    char reqDie;  
-
+    char i, checkNum; 
+    printf("Front Desk: I have %d dice available\n", available);
     while(playingGames){
         
         sem_wait(&diceCheck);
-        reqDie = fetchNumDice();
-
-        // wait until available 
-        while(reqDie<=parlorDice){
-            parlorDice=0; 
-            for(i=0; i<maxDice; i++){
-                parlorDice++; 
-                diceSlots[parlorDice]=i; 
-            }
-            // now we set dice to 1 since they are in use
-            for(i=0; i<parlorDice; i++){
-                available[diceSlots[i]] == 1;      
-            }
-        }    
-
-        // post canWait
-        sem_post(&canPlay); 
-        // wait till game done
-        sem_wait(&gameDone); 
-
-        // place dice back 
-        for(i=0; i<maxDice; i++){
-            if(diceSlots[i]==1){
-                available[i] == 0; 
-            }
-        }
-            sem_post(&diceCheck);
         
+        checkNum = fetchNumDice(buffer[0]);
+        printf("Group %d is requsting %d for %s\n", buffer[0], checkNum, getGame(buffer[0])); 
+        // check if available 
+        if(available>=checkNum){
+            sem_post(&diceCheck);
+            sem_wait(&changeQue);
+
+            // remove dice from availble 
+            available = available-checkNum; 
+            printf("Front Desk: I have %d dice available\n", available);
+            // play the game
+            sem_post(&canPlay); 
+            // wait till game done
+            sem_wait(&gameDone);
+
+            // remove group from buffer
+            for(i = 0; i < maxDice-1; i++){        
+                buffer[i]=buffer[i+1];
+            }
+
+            // put dice back 
+            available = available+checkNum;
+
+            sem_post(&changeQue);
+        } else {
+            sem_post(&diceCheck);
+        }
+         
     }
 }
 
 void *game(void *param) {
     
-    // set gloabl var (whoseAsking) to the ID
     char ID = *(char*)param;
-    printf(" Our ID is: %d \n", ID); 
-        
+
+    sem_wait(&addQue);
+    buffer[count] = ID+1;
+    count++; 
+    sem_post(&addQue);
+
     // sem_wait until can play
     sem_wait(&canPlay); 
     // if can play, so youre playing, then sleep
-    printf("Group %d is now playing\n", gameID); 
+    printf("Group %d is now playing %s\n", buffer[0], getGame(buffer[0])); 
     sleep(1);
     sem_post(&gameDone); 
 }
