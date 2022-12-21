@@ -8,8 +8,8 @@
       "args": [ "-lpthread -o program" ],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/drk/workspace/Operating-Systems/3_Game_Parlor",
-      "program": "/home/drk/workspace/Operating-Systems/3_Game_Parlor/program",
+      "cwd": "/home/drk/workspace/pythonProj/Operating-Systems/Process-Synchronization/Game-Parlor",
+      "program": "/home/drk/workspace/pythonProj/Operating-Systems/Process-Synchronization/Game-Parlor/program",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

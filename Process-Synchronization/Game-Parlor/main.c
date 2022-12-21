@@ -21,7 +21,7 @@ int main() {
 
     // we create each thread 5x since each game is played 5x
     for(j=0; j<5; j++){
-        
+        printf("Front Desk: I have 8 dice available\n");
 		for(i=0; i<8; i++){
             char* id = malloc(sizeof(char)); 
             *id = i; 

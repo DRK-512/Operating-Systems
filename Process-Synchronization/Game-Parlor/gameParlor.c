@@ -82,7 +82,7 @@ void *parlor() {
 
     char i, checkNum; 
     char available = maxDice;
-    printf("Front Desk: I have %d dice available\n", available);
+
     while(1){
         
         checkNum = fetchNumDice(buffer[0]);
