@@ -1,4 +1,4 @@
-#include "gameParlor.h"
+#include "gameProcessing.h"
 
 /* 
     The program is intended to simulate a game parlor with the use of threads and semaphores

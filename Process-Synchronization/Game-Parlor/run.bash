@@ -1,4 +1,4 @@
 #!/bin/bash
 [ -f program ] && rm program 
-gcc main.c gameParlor.c -o program -lpthread -g
+gcc main.c gameProcessing.c gameStats.c -o program -lpthread -g
 #./program
