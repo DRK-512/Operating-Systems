@@ -7,11 +7,10 @@
 #include <pthread.h>
 #include <semaphore.h>
 
+#define maxDice 8
 
-void *parlor(); 
-void *game(void *param); 
-
-extern sem_t canPlay, gameDone, addQue; 
-extern char count, firstGame; 
+extern sem_t mutex, setupMutex, returnMutex;
+extern sem_t gameSem[maxDice];
+void* game(void* param); 
 
 #endif

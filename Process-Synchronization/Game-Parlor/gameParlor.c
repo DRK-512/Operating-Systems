@@ -14,120 +14,147 @@ gCount will count the number of games we played
 if the group played 5x, they are no longer allowed to play
 */
 
-#define maxDice 8
+int available=maxDice;
 
-sem_t canPlay, gameDone, addQue; 
+sem_t mutex, setupMutex, returnMutex;
+sem_t gameSem[maxDice];
 
-// initalize all to 0 (0 means not in use), and set count to 0
-char count=0, firstGame=0; 
-char buffer[8] = {0}; // will hold which team is going 
+ 
+enum states {NOT_PLAYED, PLAYING, DONE_PLAYING}; 
 
-// returns the number of dice the group needs
-char fetchNumDice(char gameID){
-    // find out how many dice we are working with 
-    char dice=0; 
-    switch(gameID){
+struct gameStruct {
+    char* name; 
+    char numDice; 
+    char state; 
+    char round; 
+}; 
+
+struct gameStruct games[maxDice]; 
+
+char getNumDice(char amount){
+    switch(amount){
+        case 0: 
         case 1: 
-        case 2: 
-            dice=4;
+            return 4;
             break;  
-        case 3:
-        case 4:  
-            dice=5;
-            break; 
-        case 5:
-        case 6:  
-            dice=2;
-            break; 
-        case 7: 
-        case 8:  
-            dice=1;
-            break; 
-        default: 
-            // gameID = null, we skip for now
-            break;  
-    }   
-    return dice; 
-}
-
-// returns the name of the game that the group is playing 
-char* getGame(char numDice){
-    // find out how many dice we are working with 
-    char* gameName; 
-    switch(numDice){
-        case 1: 
         case 2: 
-            gameName="Backgammon";
+        case 3: 
+            return 5; 
             break; 
-        case 3:
         case 4: 
-            gameName="Risk";
+        case 5: 
+            return 2; 
             break; 
-        case 5:
-        case 6:
-            gameName="Monopoly";
-            break; 
+        case 6: 
         case 7: 
-        case 8: 
-            gameName="Pictionary"; 
-            break;  
-        default: 
-            gameName=""; 
-            break;  
-    }   
-    return gameName; 
+            return 1; 
+            break; 
+    }
 }
 
-void *parlor() {
-
-    char i, checkNum; 
-    char available = maxDice;
-
-    while(1){
-        
-        checkNum = fetchNumDice(buffer[0]);
-        printf("Group %d is requsting %d for %s\n", buffer[0], checkNum, getGame(buffer[0])); 
-        // check if available 
-        if(available>=checkNum){
-
-            // remove dice from availble 
-            available = available-checkNum; 
-            printf("Front Desk: I have %d dice available\n", available);
-            // play the game
-            sem_post(&canPlay); 
-            // wait till game done
-            sem_wait(&gameDone);
-
-            // remove group from buffer
-            for(i = 0; i < maxDice-1; i++){        
-                buffer[i]=buffer[i+1];
-            }
-
-            // put dice back 
-            available = available+checkNum;
-
-        }       
+char* getName(char amount){
+    switch(amount){
+        case 0: 
+        case 1: 
+            return "Backgammon";
+            break;  
+        case 2: 
+        case 3: 
+            return "Risk"; 
+            break; 
+        case 4: 
+        case 5: 
+            return "Monopoly"; 
+            break; 
+        case 6: 
+        case 7: 
+            return "Pictionary"; 
+            break;    
     }
+}
+
+char* getRound(char amount){
+    switch(amount){
+        case 0: 
+            return "first";
+            break;  
+        case 1: 
+            return "second"; 
+            break; 
+        case 2: 
+            return "third"; 
+            break; 
+        case 3: 
+            return "fourth"; 
+            break; 
+        case 4: 
+            return "fifth"; 
+            break; 
+        default: 
+            return "TOO MANY ROUNDS!!"; 
+            break; 
+    }
+}
+
+void parlor(char gameID) {
+    // check if dice are available
+    printf("Front Desk: I have %d dice available\n", available); 
+
+    if (games[gameID].state == NOT_PLAYED && available>games[gameID].numDice) {
+        // since dice are avalibale, the game will start 
+        games[gameID].state = PLAYING;
+        available = available-games[gameID].numDice; 
+
+        sem_post(&gameSem[gameID]);
+        printf("Group %d: We are playing our %s game of %s\n", gameID+1, getRound(games[gameID].round), games[gameID].name); 
+        
+    }
+}
+
+void request_dice(char gameID) {
+    
+    sem_wait(&mutex);
+ 
+    printf("Group %d: Requesting %d dice for %s\n", gameID+1, games[gameID].numDice, games[gameID].name);
+ 
+    // check if we can play
+    parlor(gameID);
+ 
+    sem_post(&mutex);
+ 
+    // if we cant play, wait until we can 
+    sem_wait(&gameSem[gameID]);
+ 
+}
+void return_dice(char gameID){
+    sem_wait(&returnMutex);
+ 
+    // we are now placing our chopsticks to think
+    games[gameID].state = DONE_PLAYING;
+ 
+    printf("Group %d: We are done playing our %s game of %s\n", gameID+1, getRound(games[gameID].round), games[gameID].name);  
+ 
+    // put dice back 
+    available = available+games[gameID].numDice; 
+ 
+    sem_post(&returnMutex);
 }
 
 void *game(void *param) {
-    
-    char ID = *(char*)param;
 
-    sem_wait(&addQue);
-    buffer[count] = ID+1;
-    count++; 
-    sem_post(&addQue);
+    char i=0; 
 
-    // sem_wait until can play
-    sem_wait(&canPlay); 
-    // if can play, so youre playing, then sleep
-    if(firstGame){
-        firstGame=0; 
-    } else {
-        printf("Group %d is now playing %s\n", buffer[0], getGame(buffer[0])); 
+        sem_wait(&setupMutex);     
+        char num = *(char*)param;
+        games[num].round = i; 
+        games[num].name = getName(num); 
+        games[num].numDice = getNumDice(num); 
+        games[num].state = NOT_PLAYED; 
+
+        sem_post(&setupMutex); 
+
+        request_dice(num); 
         sleep(1);
-    }
+        return_dice(num);
     
-    sem_post(&gameDone);    
 }
