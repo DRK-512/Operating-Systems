@@ -7,19 +7,22 @@
 #include <pthread.h>
 #include <semaphore.h>
 
+#define START_GAME 1
+#define FINISH_GAME 2
 #define maxDice 8
 
 sem_t mutex, setupMutex, returnMutex;
-sem_t gameSem[maxDice];
- 
-enum states {NOT_PLAYED, PLAYING, DONE_PLAYING}; 
 
 struct gameStruct {
     char* name; 
     char numDice; 
-    char state; 
     char round; 
 }; 
+
+typedef struct s_mainGame{
+    char* id; 
+    char* round; 
+} mainGame; 
 
 struct gameStruct games[maxDice]; 
 

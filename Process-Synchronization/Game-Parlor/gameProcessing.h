@@ -3,6 +3,6 @@
 
 #include "gameStats.h"
 
-void* game(void* param); 
+void *game(void *param); 
 
 #endif
