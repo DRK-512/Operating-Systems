@@ -1,4 +1,4 @@
-# Modified ps aux
+# Own PS Program
 **Author: Darek Konopka**
 
 ### What is the goal? 
