@@ -30,7 +30,7 @@ int main() {
 	printf("The barber is sleeping for %d seconds\n", sleepTime);
 	sleep(sleepTime);
 
-      return 0; 
+	return 0; 
 }
 
 
