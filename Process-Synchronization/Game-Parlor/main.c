@@ -32,5 +32,5 @@ int main() {
 			pthread_join(game_threads[i], NULL);
 		}
 	}
-	printf("\nAll games have completed their %d rounds!\nThanks for playing!", numRounds); 
+	printf("\nAll games have completed their %d rounds!\nThanks for playing!\n", numRounds); 
 }
