@@ -1,11 +1,11 @@
 #include "gameProcessing.h"
 
 /* 
-    The program is intended to simulate a game parlor with the use of threads and semaphores
-    people go up to the gameparlor to borrow a # of dice for thier game
-    each game has a different number of dice, and so we have to keep track of how many 
-    dice the game parlor has at a time so we know if people can play a game
-*/
+ * The program is intended to simulate a game parlor with the use of threads and semaphores
+ * people go up to the gameparlor to borrow a # of dice for thier game
+ * each game has a different number of dice, and so we have to keep track of how many 
+ * dice the game parlor has at a time so we know if people can play a game
+ */
 
 int main() {
 
