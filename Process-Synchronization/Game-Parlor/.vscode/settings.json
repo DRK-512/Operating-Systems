@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "gameprocessing.h": "c",
-        "ratio": "c",
-        "semaphore.h": "c"
-    }
-}

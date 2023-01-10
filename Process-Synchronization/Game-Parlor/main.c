@@ -14,25 +14,23 @@ int main() {
 	sem_init(&mutex, 0, 1);
 	sem_init(&returnMutex, 0, 1);
 	sem_init(&setupMutex, 0, 1);
-    
-	mainGame s_game;
-	int i, j;
 
-	for(j=0; j<5; j++){
+	char i, j;
+
+	// the assignment asks for 5, but this is more cool 
+	numRounds = 5; 
+
+	for(j=0; j<numRounds; j++){
 		for (i = 0; i < maxDice; i++) {
-			// add params to struct then call thread with struct
-			char* id1 = malloc(sizeof(char)); 
-			char* id2 = malloc(sizeof(char)); 
-			*id1 = i;
-			*id2 = j;
-			s_game.id = id1;
-			s_game.round = id2;
-
-			pthread_create(&game_threads[i], NULL, game, &s_game);
+			// add params to struct then call thread with struct		
+			char* id = malloc(sizeof(char)); 
+            *id = i; 
+			// we also pass in the ID of the game so we know which one we are talking about
+		    pthread_create(&game_threads[i], NULL, game, id);
 		}
-
 		for (i = 0; i < maxDice; i++) {
 			pthread_join(game_threads[i], NULL);
 		}
 	}
+	printf("\nAll games have completed their %d rounds!\nThanks for playing!", numRounds); 
 }
