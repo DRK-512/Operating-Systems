@@ -3,18 +3,21 @@
 sem_t writting;
 pthread_mutex_t studentMutex, teacherMutex;
 
-unsigned char val = 0;
-unsigned char studentsReading = 0;
+uint8_t val = 0;
+uint8_t studentsReading = 0;
 
 // Remember the terachers are the writters in this senario
 void *teacherThread(void *param) {   
 
+    // wait until no students are reading the board
     sem_wait(&writting);
-    char ID = *(char*)param;
-    char moreAssistance=0; 
+    uint8_t ID = *(uint8_t*)param;
+    uint8_t moreAssistance=0; 
 
     // two teachers should not be writting at the same time 
     pthread_mutex_lock(&teacherMutex);  
+
+    // check if our teacher has teach assistant's
     if(ID!=0){
         moreAssistance=1;
     }
@@ -36,9 +39,9 @@ void *teacherThread(void *param) {
 // Remember the students are the readers in this senario
 void *studentThread(void *param) {   
 
-    char ID = *(char*)param;
+    uint8_t ID = *(uint8_t*)param;
     
-    // We put a mutex here to process this one thread at a time
+    // We put a mutex here to process this one student at a time
     pthread_mutex_lock(&studentMutex);
     studentsReading++;
 
