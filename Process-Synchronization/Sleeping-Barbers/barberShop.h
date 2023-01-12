@@ -12,7 +12,7 @@ extern sem_t chairs_mutex;
 extern sem_t sem_customer;
 extern sem_t sem_barber;
 extern uint8_t num_chairs;
-extern uint8_t haircutTime;
+extern uint8_t num_customers;
 
 void *barber(void *param); 
 void *customer(void *param); 

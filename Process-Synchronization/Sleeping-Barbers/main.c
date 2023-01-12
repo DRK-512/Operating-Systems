@@ -7,10 +7,8 @@
 int main() {
 
 	// set global and local varibles
-	num_chairs = 5; // we have 5 chairs in our barber shop 
-	haircutTime = 2; // customers will wait 2
-	int sleepTime = 4; // it takes us 4 to cut someones hair
-	int customers = 8; // we have 8 people wanting haircuts
+	num_chairs = NUM_CHAIRS; // we have 5 chairs in our barber shop 
+	num_customers = NUM_CUSTOMERS; 
 
 	// Initialize semaphores, chairs will start at 1, where the others start at 0 
 	sem_init(&chairs_mutex,0,1);
@@ -32,7 +30,6 @@ int main() {
 		*ID = i; 
 		pthread_create(&customerThread[i], NULL, customer, ID);
 	}
-
 	for (i = 0; i < NUM_BARBERS; i++) {
 		pthread_join(barberThread[i], NULL);
 	}
