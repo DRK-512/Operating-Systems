@@ -17,8 +17,8 @@ int main() {
 
 	// Create threads for our customers and barber
 	pthread_t barberThread[NUM_BARBERS];
-    	pthread_t customerThread[NUM_CUSTOMERS];
-	
+	pthread_t customerThread[NUM_CUSTOMERS];
+
 	uint8_t i; 
 	for (i = 0; i < NUM_BARBERS; i++) {
 		uint8_t* ID = malloc(sizeof(uint8_t)); 
