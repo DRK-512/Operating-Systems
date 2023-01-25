@@ -13,6 +13,8 @@ $ gcc main.c schedulerFunctions.c -o program
 ./program <path to input file>
 ```
 
+- Shortest Job First (SJF) Scheduling: processes are executed based on their burst time, with the shortest job being executed first. It can be either non-preemptive or preemptive.
+
 ## Project Description
 In this assignment, you will be writing a scheduler called srtfScheduler to schedule processes to run, using shortest remaining time first scheduling. Given the running time information about processes, you will write a scheduler that runs the processes in the order of remaining run time of the process. Essentially, when a process is running, if another process arrives whose run time is less than the remaining time of the currently running process, then the running process is removed from CPU and the process that newly arrived is given the CPU.
 

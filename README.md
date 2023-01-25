@@ -5,7 +5,12 @@ Each project is categorized based off section, and each project should have its 
 
 For every project simply run <br>
 $ make
-Then some executable will be generated, and will not run
+Then some executable will be generated, and will run the executable
 If it is not ran, then it needs user inputs to run 
-To remove the executables, simply run <br>
+To remove the executables properly, simply run <br>
 $ make clean 
+
+If there are some OS project that are not listed here, please let me know
+
+NOTE: 
+These are for learning purposes only, please do not copy and claim as your own
