@@ -4,10 +4,11 @@ CFLAGS = -g
 all: Shortest_Scheduler
 	
 Shortest_Scheduler: 
-	${CC} ${CFLAGS} prime.c primeFunctions.c -o prime
-	${CC} ${CFLAGS} main.c schedulerFunctions.c -o Shortest_Scheduler
-	./Shortest_Scheduler input.txt
+	mkdir -p bin
+	${CC} ${CFLAGS} src/prime.c src/primeFunctions.c -o bin/prime -Iinclude
+	${CC} ${CFLAGS} src/schedulerFunctions.c src/main.c -o Shortest_Scheduler -Iinclude
+	./Shortest_Scheduler processes.txt
 
 clean: 
-	rm prime Shortest_Scheduler
-
+	rm -r bin
+	rm Shortest_Scheduler

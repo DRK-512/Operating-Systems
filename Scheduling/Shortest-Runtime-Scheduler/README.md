@@ -1,24 +1,18 @@
 # Shortest Remaining Time First Scheduler
 **Author:Darek Konopka**
 
-### How to compile it
+## What is a Shortest Runtime Scheduler? 
+- Shortest Job First (SJF) Scheduling: A scheduler that allows processes to be executed based on their burst time, with the shortest job (or the one with the shortest burst time) being executed first. It can be either non-preemptive or preemptive.
+
+## How to compile it
 To compile the code use following command:
 ```bash
-$ gcc prime.c primeFunctions.c -o prime
-$ gcc main.c schedulerFunctions.c -o program
+make
 ```
-### How it is used:
-```bash 
-./prime
-./program <path to input file>
-```
-
-- Shortest Job First (SJF) Scheduling: processes are executed based on their burst time, with the shortest job being executed first. It can be either non-preemptive or preemptive.
+This will also automatically run it as well since no input params are needed, it only looks at the processing.txt
 
 ## Project Description
-In this assignment, you will be writing a scheduler called srtfScheduler to schedule processes to run, using shortest remaining time first scheduling. Given the running time information about processes, you will write a scheduler that runs the processes in the order of remaining run time of the process. Essentially, when a process is running, if another process arrives whose run time is less than the remaining time of the currently running process, then the running process is removed from CPU and the process that newly arrived is given the CPU.
-
-The srtfScheduler creates one child process for each process in the file, and schedules them according to the shortest remaining time scheduling algorithm. It ensures that, at every instant of time, the process that is currently running has the least amount of remaining run time compared to any other process in the system. A process is taken off the CPU in two ways:
+Here we will create an SJF scheduler that creates one child process for each process in the processing.txt file, and schedules them according to the shortest remaining time scheduling algorithm. It ensures that, at every instant of time, the process that is currently running has the least amount of remaining run time compared to any other process in the system. A process is taken off the CPU in two ways:
   1.) The current running process finishes its burst or 
   2.) A newly arrived process has lower burst time than the remaining time of the currently running process. 
 
@@ -46,8 +40,8 @@ The output from your scheduler should include the folloiwing scheduling activiti
 - Each time it terminates a process. 
 Each line of printout should include the current time in seconds that is kept by the scheduler.
 
-SAMPLE RUN:
-Assume input.txt contains the following:
+## SAMPLE RUN:
+Assume the processes.txt contains the following:
 
 | PID |  AT  |  BURST |
 | :-: | :--: |  :---: |
@@ -58,97 +52,30 @@ Assume input.txt contains the following:
 |  4  |   7  |    2   |
 
 ```bash
-$ ./srtfScheu1er input.txt
+Scheduler: Scheduler runtime: 1 second. 
+Scheduling Process 0 (Pid 1314) with a 7 second burst time.
 ```
+**When a process is scheduled for the first time it prints the following:**
 ```bash
-Scheduler: Time Now: 1 second
-Scheduling to Process 0 (Pid 1314) whose remaining time is 7 seconds.
+Process 0: My PID is 1314, and I just got started. 
+Process 0: I'll be finding the next prime number from 233343434.
+Scheduler: Scheduler runtime: 2 seconds. 
 ```
-(When a process scheduled for the first time, it prints the following)
+**When a process is suspended it prints the following:**
 ```bash
-Process 0: my PID is 1314: I just got started. I am starting with the number 233343434 to find the next prime number.
-
-Scheduler: Time Now: 2 seconds
-Suspending Process 0 with remaining time of 6 seconds and Resuming Process 1 with remaining time of 4 seconds
-```
-(When a process is suspended... it prints the following)
-Process 0: my PID is 1314: I am about to be suspended... Highest prime number I found is 5754853343.
-```bash
-Process 1: my PID is 1315: I just got started. I am starting with the number 9848288302 to find the next prime number.
-
-Scheduler: Time Now: 4 seconds
+Process 0: I am about to be suspended. 
+Process 0: The highest prime number I found is 5754853343.
+Suspending Process 0 with remaining time of 6 seconds and resuming process 1 with remaining time of 4 seconds
+Process 1: my PID is 1315: I just got started. 
+Process 1:  I'll be finding the next prime number from 9848288302. 
+Scheduler: Scheduler runtime: 4 seconds
 New process 2 with remaining time of 4 seconds has arrived
-
 Scheduler: Time Now: 6 seconds Terminating Process 1
 New process 3 with remaining time of 4 seconds has arrived Scheduling process 3
-
 Etc.
 ```
-(When a process ends... it prints the following)
+**When a process ends it prints the following:**
 ```bash
 Process 0: my PID is 1314: I completed my task and I am exiting. Highest prime number I found is 1000000000063.
 ```
 
-All the data in the output above are made-up. It shows you the format and what is expected. For example, you could be printing a different prime number.
-
-## Attacking the Problem:
-### Suspending and Resuming Child Processes:
-Your main (parent) program will schedule the highest priority child by suspending the child process that is currently running and resuming the child process with highest priority. This is done by sending signal of **SIGTSTP** (not SIGSTP) to the child to suspend and **SIGCONT** to resume. Both of these signals can be handled in the child so that the child can do the printout when the signal is received. Note that sending SIGSTP will stop the child but this signal cannot have a handler. So, child will stop but will be unable to print when it receives the signal. The parent can use the kill(pid, signal_num function call to send the signal to the child by providing it pid in the kill call.
-
-To handle signals you need to set up signal handler. You need to write a function what will create the signal handler so that the function runs whenever the specified signal is received.
-
-It can be done as follows: 
-```c
-struct sigaction sa;
-
-/* Install timer handler as the signal handler for SIGALRM. */ 
-memset (&sa, 0, sizeof (sa));
-sa.sa handler = &timer handler; 
-sigaction (SIGALRM, &sa, NULL);
-```
-
-### Keeping track of time in the scheduler:
-To keep time, the parent uses the real interval timer which measures the real "wall clock time”. This is the timer that will be used by the scheduler to schedule, suspend and resume processes. When the timer goes off it sends SIGALRM which can then handle the suspension and resumption of process as needed. The timer is set using code along these lines: 
-```C
-struct itimerval timer;
-
-/* Install timer handler as the signal handler for SIGALRM. */
-
-/* The timer goes off 1 second after installation of the timer. */
-timer.it value.tv sec = 1;
-timer.it value.tv usec = 0;
-
-
-/* ... and every 1 second after that. */ 
-timer.it interval.tv sec = 1;
-timer.it interval.tv usec = 0;
-
-
-/* Start a real timer. It counts down whenever this process is executing. */
-setitimer (ITIMER REAL, &timer, NULL);
-
-while (1) {}
-```
-### How to start a child process by the scheduler
-Set up a real timer in the scheduler as specified above. In the signal handler, for k the desired processes at the appropriate time. After you fork the child, uses one of the exec suite of calls to execute the child process in the child. Of course you should have an objecct file name **prime.o** ready to execute, so you can use it inside exec. Send at least two parameters in exec. One for sending the process number and one for priority. This will help the child process to print this information. This will be in the argv of the child.
-
-### How to stop a child process by the scheduler
-When a child process has completed its burst (as calculated by the scheduler), send a signal **SIGTERM**. The child prints an output (shown above) and exits the system.
-
-### How to write code for child processes
-In a separate file, say prime.c, you should write a main function as if it is an independent program.
-
-It should print its first message saying that it has started (shown above), then stay in an infinite loop trying to find large prime number. When it receives signals it does the printout.
-
-The child should stay in a forever loop finding higher and higher primes and handling arriving signals (SIGTSTP, SIGCONT and SIGTERM).
-
-### Notes:
-    1. Since there are multiple processes running on the CPU, and do not have a dedicated CPU, when the scheduler (main) processes schedules a child, the child may not run immediately. However, for the purposes of this assignment, we will assume that child process starts immediately after it is scheduled by the scheduler. So, when the parent process counts k real seconds, we assume that the child that is currently scheduled ran for k real seconds.
-
-    2. Global variable usage is permitted. You will need them. In OS class, global variable usage is common. Enjoy using them!
-
-    3. Always end every printf with “\n”. It completes the buffer and makes printout happen. Otherwise signals will forbid a printout from completion.
-
-    4. As you develop you will find issues where there are too many processes ‘hanging around’ the system. You may use ps —aef to see which processes are running and kill undesired processes during debugging.
-
-    5. The child processes get killed in the end (alas!) so the scheduler need not issue waitpid.

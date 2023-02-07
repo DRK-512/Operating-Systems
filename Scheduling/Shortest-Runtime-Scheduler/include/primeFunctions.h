@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
@@ -10,12 +11,12 @@
 #include <sys/time.h>
 #include <time.h>
 
-long unsigned int bigRandom();
+uint32_t bigRandom();
 void sigHandler(int signum);
-int checkPrimeAndPrint(unsigned long int toCheck);
+uint8_t checkPrimeAndPrint(uint32_t toCheck); 
 
-extern long unsigned int calculatedPrime;
-extern int process_num;
+extern uint32_t calculatedPrime;
+extern uint16_t process_num;
 extern pid_t pid;
 
 #endif

@@ -1,19 +1,15 @@
 #include "primeFunctions.h"
 
-/*
-    Function Name: main
-    Input to the method: PID
-    Output(Return value): prime number
-    Brief description of the task: This is the child that is created from the main.c function
-*/
+// This is the child that is created from the main.c function
 int main(int argc, char* argv){
-    // first we get the random number, and get the PID 
+
+    // generate random number, and get the PID 
     calculatedPrime = bigRandom();
     process_num = atoi(&argv[1]);
     int numPrinted = 0;
     pid = getpid();
 
-    
+    // initalize the signal
     struct sigaction sa;
     memset(&sa, 0, sizeof(sa));
     sa.sa_handler = sigHandler;
@@ -22,13 +18,13 @@ int main(int argc, char* argv){
     sigaction(SIGTERM, &sa, NULL);
 
     printf("Process %d: my PID is <%d>: I just got started.\n", process_num, pid); 
-    printf("I am starting with the number %lu to find the next prime number.\n", calculatedPrime);
-    long unsigned int numberToCheck = calculatedPrime +1; 
+    printf("Process %d: I'll be finding the next prime number from %d.\n", process_num, calculatedPrime);
+    u_int64_t numberToCheck = calculatedPrime +1; 
+
     // now we check if our number is prime 
     while (numPrinted <10) {
-        if (checkPrimeAndPrint(numberToCheck) ==1){ 
+        if (checkPrimeAndPrint(numberToCheck) ==1)
             numPrinted++;
-        }
-       numberToCheck++; 
+        numberToCheck++; 
     }   
 }
