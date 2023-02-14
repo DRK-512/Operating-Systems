@@ -7,7 +7,7 @@ pid_t pid;
 // This will check if a number is prime, then return it if it is
 uint8_t checkPrimeAndPrint(uint32_t toCheck) {
     uint32_t i = 2; 
-    uint16_t prime = 1; 
+    uint8_t prime = 1; 
     while (prime == 1&& i < toCheck/2){ 
         if (toCheck % i == 0) 
             prime = 0;

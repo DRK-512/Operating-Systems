@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Shortest-Runtime-Scheduler'
+mkdir -p bin
+gcc -g src/prime.c src/primeFunctions.c -o bin/prime.o -Iinclude
+gcc -g src/schedulerFunctions.c src/main.c -o bin/main.o -Iinclude
+echo "./bin/main.o processes.txt" > Shortest_Scheduler
+chmod +x Shortest_Scheduler
+make: Leaving directory '/home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Shortest-Runtime-Scheduler'
+ 

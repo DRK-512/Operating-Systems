@@ -12,9 +12,9 @@
 
 typedef struct inputData
 {
-	uint16_t PID; 
-	uint16_t AT; 
-	uint16_t Burst; 
+	uint16_t PID;
+	int16_t AT; 
+	int16_t Burst; 
 }PIDData;
 
 void createData(FILE* file);
@@ -23,11 +23,11 @@ void resumeChild(pid_t child);
 void suspendChild(pid_t child);
 void terminateChild(pid_t child); 
 
-void checkBurst();
 void createChild(uint16_t new_process);
-void scheduleHandler();
+void scheduleHandler(int signum);
 
-PIDData findSmallestPID();
+PIDData findNextPID();
+void checkBurst(); 
 
 extern uint8_t dataSize;
 extern uint8_t totalTimeValue;

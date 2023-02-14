@@ -6,7 +6,7 @@ int main(int argc, char* argv){
     // generate random number, and get the PID 
     calculatedPrime = bigRandom();
     process_num = atoi(&argv[1]);
-    uint8_t numPrinted = 0;
+    int numPrinted = 0;
     pid = getpid();
 
     // initalize the signal

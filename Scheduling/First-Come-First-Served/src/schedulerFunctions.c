@@ -12,13 +12,13 @@ pid_t children[10];
 void createData(FILE* file) { 
 
     uint8_t input[100], buffer[60]; 
-    uint8_t i, j=0; 
+    uint8_t i = 0, j = 0; 
 
     // throw first line away (since this is the processes.txt header)
     fgets(buffer,60,file); 
 
     // since max of 10 PIDs, and 3 total parameters, then we have a max of 30 
-    for(i=0; i<=30; i++){
+    for(i;i<=30;i++){
         if(fscanf(file, "%s", input)==EOF) {
             break; 
         }
@@ -35,7 +35,7 @@ void createData(FILE* file) {
     } 
 }
 
-void scheduleHandler(){ 
+void scheduleHandler(int signum){ 
 
     totalTimeValue++;
     
@@ -56,10 +56,10 @@ void scheduleHandler(){
         }   
     }   
 
-    PIDData smallestPID = findSmallestPID();
+    PIDData nextPID = findNextPID();
     checkBurst(); 
-
-    if(smallestPID.PID != running_child) {
+    
+    if(nextPID.PID != running_child) {
         if(running_child != -1) {
         	printf("Scheduler: Suspending Process %d with Remaining Time : %d \n",
             running_child, data[running_child].Burst);
@@ -67,7 +67,7 @@ void scheduleHandler(){
         	suspendChild(children[running_child]);
         }
 
-        running_child = smallestPID.PID;
+        running_child = nextPID.PID;
 
         if(children[running_child] == 0) {
             printf("Scheduler: Starting Process %d with Remaining Time : %d \n",
@@ -75,7 +75,7 @@ void scheduleHandler(){
 
             createChild(running_child);
         } else {
-            running_child = smallestPID.PID;
+            running_child = nextPID.PID;
             printf("Scheduler: Resuming Process %d with Remaining Time : %d \n",
             running_child, data[running_child].Burst);
 
@@ -84,7 +84,28 @@ void scheduleHandler(){
     }
 }
 
+PIDData findNextPID() {
+    uint8_t i, location = 0;
+
+    for(i=0; i < dataSize; i++) {
+        if(location!=i){
+            if(data[location].Burst > 0) {
+                if(data[i].Burst > 0){
+                    if((data[i].AT < data[location].AT) ) {
+                        location = i;
+                    }
+                }
+            } else {
+                location=i; 
+            }
+        } 
+    }   
+
+    return data[location];
+}
+
 // returns smallestPID just in case two burst times are the same 
+/*
 PIDData findSmallestPID() {
 
     uint8_t i, location = 0;
@@ -101,8 +122,9 @@ PIDData findSmallestPID() {
 
     return data[location];
 }
+*/
 
-// This will check if all processes have finished
+// This will check if the process has finished
 void checkBurst() {
     for(int i = 0; i < dataSize; i++)
         if (data[i].Burst > 0)
