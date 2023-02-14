@@ -104,26 +104,6 @@ PIDData findNextPID() {
     return data[location];
 }
 
-// returns smallestPID just in case two burst times are the same 
-/*
-PIDData findSmallestPID() {
-
-    uint8_t i, location = 0;
-
-    for(i=0; i < dataSize; i++) {
-        if(data[i].Burst > 0) {
-            if((data[i].Burst < data[location].Burst || 
-                data[location].Burst <= 0) && 
-                data[i].AT <= totalTimeValue) {
-                location = i;
-            }
-        }
-    }   
-
-    return data[location];
-}
-*/
-
 // This will check if the process has finished
 void checkBurst() {
     for(int i = 0; i < dataSize; i++)
