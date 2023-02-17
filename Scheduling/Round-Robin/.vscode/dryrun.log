@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Round-Robin'
+mkdir -p bin
+gcc -g src/prime.c src/primeFunctions.c -o bin/prime.o -Iinclude
+gcc -g src/schedulerFunctions.c src/main.c -o bin/main.o -Iinclude
+echo "./bin/main.o processes.txt" > RR_Scheduler
+chmod +x RR_Scheduler
+make: Leaving directory '/home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Round-Robin'
+ 

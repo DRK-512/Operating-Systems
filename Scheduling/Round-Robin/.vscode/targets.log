@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Feb 17 11:48:53 2023
+# Make data base, printed on Fri Feb 17 14:19:03 2023
 
 # Variables
 
@@ -39,7 +39,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Shortest-Runtime-Scheduler
+PWD = /home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Round-Robin
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -61,7 +61,7 @@ XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.QYPG01
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Shortest-Runtime-Scheduler
+CURDIR := /home/drk/workspace/myProjects/git/Operating-Systems-Projects/Scheduling/Round-Robin
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -87,7 +87,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 3930326
+VSCODE_PID = 4072086
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -187,7 +187,7 @@ SNAP_CONTEXT = BrklArXc7b2OXEWFkqXKDUo_2E2L9juHyIXA12WYLwrGW7w2wd0b
 # environment
 MANAGERPID = 2667
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3930284
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4071883
 # environment
 _ = /usr/bin/make
 # environment
@@ -220,7 +220,6 @@ IM_CONFIG_PHASE = 1
 .RECIPEPREFIX := 
 # automatic
 <F = $(notdir $<)
- 
 # environment
 SNAP_VERSION = 441438ab
 # default
@@ -252,7 +251,7 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 64769, inode 18643406): 8 files, no impossibilities.
+# . (device 64769, inode 18643404): 8 files, no impossibilities.
 
 # 8 files, no impossibilities in 1 directories.
 
@@ -262,17 +261,25 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Files
 
-Shortest_Scheduler:
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2023-02-17 11:49:12.099923531
+#  File has been updated.
+#  Successfully updated.
+
+RR_Scheduler:
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
-# @ := Shortest_Scheduler
+# @ := RR_Scheduler
 # automatic
 # * := 
 # automatic
+ 
 # < := 
 # automatic
 # + := 
@@ -290,15 +297,8 @@ Shortest_Scheduler:
 	mkdir -p bin
 	${CC} ${CFLAGS} src/prime.c src/primeFunctions.c -o bin/prime.o -Iinclude
 	${CC} ${CFLAGS} src/schedulerFunctions.c src/main.c -o bin/main.o -Iinclude
-	echo "./bin/main.o processes.txt" > Shortest_Scheduler
-	chmod +x Shortest_Scheduler
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2023-02-14 07:24:55.672929295
-#  File has been updated.
-#  Successfully updated.
+	echo "./bin/main.o processes.txt" > RR_Scheduler
+	chmod +x RR_Scheduler
 
 clean:
 #  Implicit rule search has not been done.
@@ -306,7 +306,7 @@ clean:
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 14):
 	rm -r bin
-	rm Shortest_Scheduler
+	rm RR_Scheduler
 
 # Not a target:
 .DEFAULT:
@@ -314,16 +314,14 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 
-all: Shortest_Scheduler
+all: RR_Scheduler
 #  Command line target.
-#  Implicit rule search has not been done.
+#  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/7=0%
-#  recipe to execute (from 'Makefile', line 5):
-	
 
 # Not a target:
 .SUFFIXES:
@@ -339,12 +337,12 @@ all: Shortest_Scheduler
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 138 B / avg = 9 B
-# current buf: size = 8162 B / used = 138 B / count = 15 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 15 / storage = 132 B / avg = 8 B
+# current buf: size = 8162 B / used = 132 B / count = 15 / avg = 8 B
 
 # strcache performance: lookups = 25 / hit rate = 40%
 # hash-table stats:
 # Load=15/8192=0%, Rehash=0, Collisions=0/25=0%
-# Finished Make data base on Fri Feb 17 11:48:53 2023
+# Finished Make data base on Fri Feb 17 14:19:03 2023
 
  

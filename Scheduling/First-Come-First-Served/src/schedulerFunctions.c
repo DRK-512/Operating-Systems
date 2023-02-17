@@ -100,7 +100,16 @@ PIDData findNextPID() {
             }
         } 
     }   
+    
+    if(data[location].AT > totalTimeValue){
+        totalTimeValue++; 
 
+        printf("Scheduler: Runtime: %u seconds.\nProcess %d has not arrived just yet.\n", 
+        totalTimeValue,location);
+
+        findNextPID(); 
+    }
+    
     return data[location];
 }
 
