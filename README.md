@@ -4,7 +4,7 @@ This repo consists of random operating systems project I have done whilst readin
 Each project is categorized based off section, and each project should have its own README 
 
 For every project simply run the make command, then some executable will be generated<br>
-Note that some projects will create some sort of user input, so read the readmes if you need to<br>
+Note that some projects will require some sort of user input, so read the READMEs if you need to<br>
 To remove the executables properly, simply run <br>
 $ make clean 
 
