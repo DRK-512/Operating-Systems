@@ -1,5 +1,6 @@
 
-Linux-Commands/Modified-ps-aux/5ps
+Linux-Commands/Modified-ps/5ps
+Linux-Commands/Modified-cp/modcp
 
 Process-Synchronization/Bankers-Algorithm/Bankers
 Process-Synchronization/Game-Parlor/Game_Parlor
@@ -13,5 +14,5 @@ Memory-Management/Virtual-Memory-Manager/Memory_Manager
 
 Scheduling/Shortest-Runtime-Scheduler/Shortest_Scheduler
 
-./*/*/.vscode/
+**/.vscode/
 
