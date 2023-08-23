@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
     sa.sa_handler = &scheduleHandler;
     sigaction(SIGALRM, &sa, NULL);
 
+    // The threads will exit
     while(1);
 
 }

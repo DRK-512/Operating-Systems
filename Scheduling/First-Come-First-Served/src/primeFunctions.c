@@ -21,17 +21,17 @@ void sigHandler(int signum){
     // first figure out which signal we are working with, then process it
     switch(signum) {
         case SIGTSTP:
-            printf("Process %d: my PID is <%d>, and I am suspending.\n" , process_num, pid); 
-            printf("Largest prime I found was %u. \n", calculatedPrime);
+            printf("Process %d: my PID is <%d>, and I am suspending\n" , process_num, pid); 
+            printf("Process %d: The largest prime number I found was %u\n", process_num, calculatedPrime);
             pause();
             break;
         case SIGCONT:
-            printf("Process %d: my PID is <%d>, and I am restarting.\n", process_num, pid); 
-            printf("Largest prime I found was %u.\n", calculatedPrime);
+            printf("Process %d: my PID is <%d>, and I am restarting\n", process_num, pid); 
+            printf("Process %d: The largest prime number I found was %u\n", process_num, calculatedPrime);
             break;
         case SIGTERM:
-            printf("Process %d: my PID is <%d>, and I am terminating.\n", process_num, pid); 
-            printf("Largest prime I found was %u. \n", calculatedPrime);
+            printf("Process %d: my PID is <%d>, and I am terminating\n", process_num, pid); 
+            printf("Process %d: The largest prime number I found was %u\n", process_num, calculatedPrime);
             exit(EXIT_SUCCESS);
             break;
         default:

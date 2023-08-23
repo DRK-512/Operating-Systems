@@ -42,11 +42,11 @@ void scheduleHandler(int signum){
     if(running_child != -1) {
         data[running_child].Burst--;
         
-        printf("Scheduler: Runtime: %u seconds.\nProcess %d is running with %d seconds left.\n", 
+        printf("Scheduler: Runtime: %u seconds\nProcess %d is running with %d seconds left\n", 
         totalTimeValue,running_child,data[running_child].Burst);
 
         if(data[running_child].Burst <= 0){
-		    printf("Scheduler: Terminating Process %d with Remaining Time: %d \n",
+		    printf("Scheduler: Terminating Process %d (Remaining Time: %d) \n",
             running_child, data[running_child].Burst);
         	
             terminateChild(children[running_child]);
@@ -61,7 +61,7 @@ void scheduleHandler(int signum){
     
     if(nextPID.PID != running_child) {
         if(running_child != -1) {
-        	printf("Scheduler: Suspending Process %d with Remaining Time : %d \n",
+        	printf("Scheduler: Suspending Process %d (Remaining Time: %d) \n",
             running_child, data[running_child].Burst);
 
         	suspendChild(children[running_child]);
@@ -70,13 +70,13 @@ void scheduleHandler(int signum){
         running_child = nextPID.PID;
 
         if(children[running_child] == 0) {
-            printf("Scheduler: Starting Process %d with Remaining Time : %d \n",
+            printf("Scheduler: Starting Process %d (Remaining Time: %d) \n",
             running_child, data[running_child].Burst); 
 
             createChild(running_child);
         } else {
             running_child = nextPID.PID;
-            printf("Scheduler: Resuming Process %d with Remaining Time : %d \n",
+            printf("Scheduler: Resuming Process %d (Remaining Time: %d) \n",
             running_child, data[running_child].Burst);
 
             resumeChild(children[running_child]);
@@ -87,6 +87,7 @@ void scheduleHandler(int signum){
 PIDData findNextPID() {
     uint8_t i, location = 0;
 
+    // find location of the AT varible
     for(i=0; i < dataSize; i++) {
         if(location!=i){
             if(data[location].Burst > 0) {
@@ -100,8 +101,10 @@ PIDData findNextPID() {
             }
         } 
     }   
-    
+ 
+    // if iut has not arrived, we itterate this
     if(data[location].AT > totalTimeValue){
+        
         totalTimeValue++; 
 
         printf("Scheduler: Runtime: %u seconds.\nProcess %d has not arrived just yet.\n", 
@@ -147,9 +150,9 @@ void createChild(uint16_t new_process) {
     sprintf(string_process,"%d",new_process);
 
     char* argv[3];
-    argv[0] = "./bin/prime";
+    argv[0] = "./bin/prime.o";
     argv[1] = string_process;
 
     if (children[new_process] == 0)
-        execlp("./bin/prime", argv[0],argv[1],NULL,NULL);
+        execlp("./bin/prime.o", argv[0],argv[1],NULL,NULL);
 }

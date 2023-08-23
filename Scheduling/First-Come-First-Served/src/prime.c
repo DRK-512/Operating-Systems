@@ -17,8 +17,8 @@ int main(int argc, char* argv){
     sigaction(SIGCONT, &sa, NULL);
     sigaction(SIGTERM, &sa, NULL);
 
-    printf("Process %d: my PID is <%d>: I just got started.\n", process_num, pid); 
-    printf("Process %d: I'll be finding the next prime number from %d.\n", process_num, calculatedPrime);
+    printf("Process %d: I just got started and my PID is: %d\n", process_num, pid); 
+    printf("Process %d: I'll be finding the next prime number from: %d\n", process_num, calculatedPrime);
     u_int64_t numberToCheck = calculatedPrime +1; 
 
     // now we check if our number is prime 
