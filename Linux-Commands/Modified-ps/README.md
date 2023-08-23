@@ -1,7 +1,7 @@
 # Own PS Program
 **Author: Darek Konopka**
 
-This was a school project, so the README is a little more descriptive than the rest. 
+This was a school project, so the README is a little more descriptive than the rest. <br>
 This was also done with the help from my friend Tejas Bolar
 
 ### What is the goal? 
