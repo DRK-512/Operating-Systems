@@ -3,7 +3,7 @@
 
 ### What is the goal? 
 - To write a simple / more descirptive version of the ps command 
-- It will be called 5ps, and it will be executed from the command line
+- It will be called 5ps
 
 ### How to compile it
 To compile the code use following command:
