@@ -1,6 +1,6 @@
 
-Linux-Commands/Modified-ps/5ps
-Linux-Commands/Modified-cp/modcp
+Linux-Commands/ps/5ps
+Linux-Commands/cp/modcp
 
 Process-Synchronization/Bankers-Algorithm/Bankers
 Process-Synchronization/Game-Parlor/Game_Parlor
@@ -13,6 +13,8 @@ Process-Synchronization/Elevator-Threading/Elevator
 Memory-Management/Virtual-Memory-Manager/Memory_Manager
 
 Scheduling/Shortest-Runtime-Scheduler/Shortest_Scheduler
+Scheduling/Round-Robin/bin/
+Scheduling/Round-Robin/RR_Scheduler
 
 **/.vscode/
 
