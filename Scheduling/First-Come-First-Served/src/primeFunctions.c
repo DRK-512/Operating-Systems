@@ -1,8 +1,8 @@
 #include "primeFunctions.h"
 
-uint32_t calculatedPrime;
-uint16_t process_num;
 pid_t pid;
+uint16_t process_num;
+uint32_t calculatedPrime;
 
 // This will check if a number is prime, then return it if it is
 uint8_t checkPrimeAndPrint(uint32_t toCheck) {

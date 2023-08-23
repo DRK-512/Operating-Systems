@@ -37,8 +37,7 @@ void createData(FILE* file) {
 
 void scheduleHandler(int signum){ 
 
-    totalTimeValue++;
-    
+    // Here we check if there is a child running, then we display the time left
     if(running_child != -1) {
         data[running_child].Burst--;
         
@@ -100,19 +99,15 @@ PIDData findNextPID() {
                 location=i; 
             }
         } 
-    }   
- 
-    // if iut has not arrived, we itterate this
+    }    
+    totalTimeValue++; 
+    // if it has not arrived, we itterate this
     if(data[location].AT > totalTimeValue){
-        
-        totalTimeValue++; 
-
         printf("Scheduler: Runtime: %u seconds.\nProcess %d has not arrived just yet.\n", 
         totalTimeValue,location);
 
         findNextPID(); 
     }
-    
     return data[location];
 }
 
@@ -141,6 +136,7 @@ void terminateChild(pid_t child) {
 }
 
 void createChild(uint16_t new_process) {
+    
     char string_process[10];
     if(running_child != -1)
         suspendChild(children[running_child]);

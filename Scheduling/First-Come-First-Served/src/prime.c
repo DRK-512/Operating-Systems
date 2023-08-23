@@ -1,11 +1,11 @@
 #include "primeFunctions.h"
 
 // This is the child that is created from the main.c function
-int main(int argc, char* argv){
+int main(int argc, char *argv[]){
 
     // generate random number, and get the PID 
     calculatedPrime = bigRandom();
-    process_num = atoi(&argv[1]);
+    process_num = (uint16_t)atoi(argv[1]);
     int numPrinted = 0;
     pid = getpid();
 
