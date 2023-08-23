@@ -1,6 +1,8 @@
 # Own PS Program
 **Author: Darek Konopka**
+
 This was a school project, so the README is a little more descriptive than the rest 
+
 ### What is the goal? 
 - To write a simple / more descirptive version of the ps command 
 - It will be called 5ps
