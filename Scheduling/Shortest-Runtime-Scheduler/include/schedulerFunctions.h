@@ -27,7 +27,7 @@ void checkBurst();
 void createChild(uint16_t new_process);
 void scheduleHandler();
 
-PIDData findSmallestPID();
+PIDData findShortestPID();
 
 extern uint8_t dataSize;
 extern uint8_t totalTimeValue;

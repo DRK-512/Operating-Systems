@@ -42,7 +42,7 @@ void scheduleHandler(){
     if(running_child != -1) {
         data[running_child].Burst--;
         
-        printf("Scheduler: Runtime: %u seconds.\nProcess %d is running with %d seconds left.\n", 
+        printf("Scheduler: Runtime: %u seconds.\nProcess %d is running with %d second(s) left.\n", 
         totalTimeValue,running_child,data[running_child].Burst);
 
         if(data[running_child].Burst <= 0){
@@ -56,10 +56,10 @@ void scheduleHandler(){
         }   
     }   
 
-    PIDData smallestPID = findSmallestPID();
+    PIDData shortestPID = findShortestPID();
     checkBurst(); 
 
-    if(smallestPID.PID != running_child) {
+    if(shortestPID.PID != running_child) {
         if(running_child != -1) {
         	printf("Scheduler: Suspending Process %d with Remaining Time : %d \n",
             running_child, data[running_child].Burst);
@@ -67,7 +67,7 @@ void scheduleHandler(){
         	suspendChild(children[running_child]);
         }
 
-        running_child = smallestPID.PID;
+        running_child = shortestPID.PID;
 
         if(children[running_child] == 0) {
             printf("Scheduler: Starting Process %d with Remaining Time : %d \n",
@@ -75,7 +75,7 @@ void scheduleHandler(){
 
             createChild(running_child);
         } else {
-            running_child = smallestPID.PID;
+            running_child = shortestPID.PID;
             printf("Scheduler: Resuming Process %d with Remaining Time : %d \n",
             running_child, data[running_child].Burst);
 
@@ -84,8 +84,8 @@ void scheduleHandler(){
     }
 }
 
-// returns smallestPID just in case two burst times are the same 
-PIDData findSmallestPID() {
+// returns shortestPID just in case two burst times are the same 
+PIDData findShortestPID() {
 
     uint8_t i, location = 0;
 
@@ -105,7 +105,7 @@ PIDData findSmallestPID() {
         printf("Scheduler: Runtime: %u seconds.\nProcess %d has not arrived just yet.\n", 
         totalTimeValue,location);
 
-        findNextPID(); 
+        findShortestPID(); 
     }
     
     return data[location];
