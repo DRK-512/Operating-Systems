@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Combine system info to one var
+KERNEL_INFO=$(uname -a)
+CPU_INFO=$(lscpu)
+RAM_COUNT=$(free -g | grep Mem | awk '{print $2}')
+HOSTNAME=$(hostnamectl)
+SYSTEM_UUID=$(cat /etc/machine-id)
+
+SYSTEM_INFO=${KERNEL_INFO}${CPU_INFO}${RAM_COUNT}${HOSTNAME}${SYSTEM_UUID}
+
+# Now with the sys info, I hash it with sha256 
+UNIQUE_ID=$(echo -n "$SYSTEM_INFO" | openssl sha256 | awk '{print $2}')
+
+# Print the unique identifier
+echo "Unique ID: $UNIQUE_ID"
