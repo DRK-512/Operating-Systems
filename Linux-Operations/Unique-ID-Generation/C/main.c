@@ -65,7 +65,8 @@ int main()
         printf("The /etc/machine-id file is required for this project"); 
         return -1; 
     }
-    
+
+    // I used calloc because I want all to default to 0 as opposed to NULL
     char* idToCrypt = (char *)calloc(37, sizeof(char)); 
   
     fgets(idToCrypt, 32, idFile);  
@@ -75,10 +76,11 @@ int main()
 
     srand(createSeedFromID(idToCrypt)); 
     printf("Randomly Generated Clear-Text ID: ");
-    int randomNum=0;
-    int i=0;  
+    // Now I use the random seed to generate random numbers and capital/lower-case letters
+    int i=0, randomNum=0; 
     while(i<IDSize) {
         randomNum = rand();
+        // I want numbers and letters from ASCII table
         randomNum = 33 + randomNum % (122 - 48 + 1);
         if((randomNum>47 && randomNum<58) || 
             (randomNum>64 && randomNum<91) ||
