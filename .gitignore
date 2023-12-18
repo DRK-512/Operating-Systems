@@ -1,6 +1,7 @@
 
-Linux-Commands/ps/5ps
-Linux-Commands/cp/modcp
+Linux-Operations/ps/5ps
+Linux-Operations/cp/modcp
+Linux-Operations/Unique-ID-Generation/C/GenerateID
 
 Process-Synchronization/Bankers-Algorithm/Bankers
 Process-Synchronization/Game-Parlor/Game_Parlor
