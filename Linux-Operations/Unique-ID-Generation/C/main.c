@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <uuid/uuid.h>
 #include <math.h>
 
 #define IDSize 32
