@@ -4,7 +4,7 @@ CFLAGS = -lm
 all: idGen
 
 idGen: 
-	${CC} main.c -o GenerateID ${CFLAGS}
+	${CC} ./src/main.c -o GenerateID ${CFLAGS}
 
 clean: 
 	rm GenerateID

@@ -11,3 +11,6 @@ $ make clean
 If there are some OS project that are not listed here and you want to see then feel free to leave an Issue and I can get to it when I have the chance
 
 These are for learning purposes, please don't plagerize it
+
+The style should follow that of the linux kernel 6.6 styling guide found here: 
+https://www.kernel.org/doc/html/v6.6/process/coding-style.html
