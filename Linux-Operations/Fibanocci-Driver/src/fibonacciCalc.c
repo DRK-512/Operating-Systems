@@ -4,6 +4,7 @@
 /*
  * The efficiency can be improved, but I kept it this way since the format
  * Of the functions shall be this way for the main.c
+ * mpz > mprf because mprf is for floating point, mpz is easier to use for this application
  */
  
 // Here I calculate the n-th Fibonacci number
@@ -28,52 +29,36 @@ void fibonacciCalcLow(unsigned long long* result, unsigned int n)
 	return; 
 }
 
-void fibonacciCalcHigh(mpfr_t result, unsigned int n) 
+void fibonacciCalcHigh(mpz_t result, unsigned int n) 
 {
+	int i;
+	unsigned long long a = 0, b = 1, temp=0;
+	mpz_t bA, bB, bTemp;
 	if (n < 94) {
 		printf("Input must be greater than 93"); 
 		return; 
 	} 
 	
 	// Due to overflows, we no longer use llu but mpz
-	int i;
-	unsigned long long a = 0, b = 1, temp=0;
-
 	for (i = 2; i <= 93; i++) {
 		temp = a + b;
 		a = b;
 		b = temp;
 	}
-
-	mpfr_t bA, bB, bTemp;
-	
-	// as numbers increase, accuracy decreases
-	if (n<500) {
-		mpfr_init2(bA, 1024); // Set precision to 1024 bits
-		mpfr_init2(bB, 1024); // Set precision to 1024 bits
-		mpfr_init2(bTemp, 1024); // Set precision to 1024 bits
-		mpfr_init2(result, 1024); // Set precision to 1024 bits
-	} else {
-		mpfr_init2(bA, n*2); // Set precision to 1024 bits
-		mpfr_init2(bB, n*2); // Set precision to 1024 bits
-		mpfr_init2(bTemp, n*2); // Set precision to 1024 bits
-		mpfr_init2(result, n*2); // Set precision to 1024 bits
-	}
-	
-	mpfr_set_ui(bA, temp, MPFR_RNDN);
-	mpfr_set_ui(bTemp, a, MPFR_RNDN);
-	mpfr_add(bB, bA, bTemp, MPFR_RNDN); 
+	// Initialize variables
+	mpz_init(bB);
+	mpz_init_set_ui(bA, temp);
+	mpz_init_set_ui(bTemp, a);
+	mpz_add(bB, bA, bTemp); 
 
 	for (i = 94; i <= n; i++) {
-		mpfr_add(bTemp, bA, bB, MPFR_RNDN);
-		mpfr_set(bA, bB, MPFR_RNDN);
-		mpfr_set(bB, bTemp, MPFR_RNDN);
+		mpz_add(bTemp, bA, bB);
+		mpz_set(bA, bB);
+		mpz_set(bB, bTemp);
 	}
 
-	mpfr_set(result, bA, MPFR_RNDN);
-	mpfr_clear(bA);
-	mpfr_clear(bB);
-	mpfr_clear(bTemp);
+	mpz_set(result, bA);
+	mpz_clears(bA, bB, bTemp, NULL);
 	return; 
 }
 
@@ -88,13 +73,15 @@ int countDigitsLow(unsigned long long int num)
 	return count; 
 }
 
-// I could use mpz_sizeinbase, but fib(130) should be 27 # long, but mpz_size returns 28, so I want more accurate numbers
-int countDigitsHigh(mpfr_t num) 
+// I could use mpz_sizeinbase, but fib(130) should be 27 # long, but it returns 28, so I want more accurate numbers
+int countDigitsHigh(mpz_t num) 
 {	
-	int count=0;  
-	while (mpfr_cmp_d(num, 1.0) >= 0) {
-		mpfr_div_ui(num, num, 10, MPFR_RNDN);
+	int count = 0;
+
+	while (mpz_cmp_ui(num, 0) > 0) {
+		mpz_tdiv_q_ui(num, num, 10);
 		count++;
 	}
+
 	return count;
 }

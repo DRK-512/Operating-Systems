@@ -5,9 +5,67 @@
 - The Fibonacci sequence is a sequence in which each number is the sum of the two preceding ones
 - The first 15 are: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377
 
+## What do we have? 
+- In the src dir we have four .c files
+1. fibonacci.c is the kernel module made for this, and uses the test-without-gmp.c approach since gmp is not part of the kernel 
+2. test-with-gmp.c is a fibonacci solver that actaully displays the number if it is greater than the max of an unsigned long long
+3. test-without-gmp.c 
+4. fibonacciCalc.c is a file consisting of the fibonacci functions used for test-with-gmp.c
+
 ## How The Code Works
 - This is a Linux Driver, so it is a bit different than a simple gcc command followed by execution
-- The test.c is a way to test the fibanocci function works
-- The fibonacci.c is the module we will be using
+- The test-with-gmp and test-without-gmp is a way to test that fibanocci functions works
+	- Not test-without-gmp will not display the whole number, rather, a reminder and overflow counter for unsigned long long
+```bash
+# Example Output
+$ ./test-with-gmp
+Enter Fibonacci number you want: 130
+Calculating Fibonacci Number for 130 ... 
+Fibonacci Number of 130 is: 659034621587630041982498215
+The # digits is: 27
+$ ./test-without-gmp 
+Enter the index of the Fibonacci sequence: 130
+Fibonacci number at index 130: 7810785687184081992 + 18446744073709551615 * 35726338
+18446744073709551615 is the max of unsinged long long, so overflow will occur here
+```
+- The fibonacci.c is the module we will be using, and uses the test-without-gmp approach, so expect that output in the dmesg
 - You need to load the driver to your linux kernel, so that is why the makefile is much longer than usual
 - You will notice there is no main.c file, that is becuase kernel modules dont really use a main funciton
+
+## How To Build The Kernel Module
+- I have created a few make functions, that can help you achieve this
+### 1. Compile The Module
+```bash
+make
+```
+### 2. Insert The Kernel Module
+```bash
+make install
+```
+### 3. Load the Kernel Module
+- Before you can run another command, you must run dmesg to find a line of code that looks like this: 
+```bash
+Fibonacci: Module loaded with major number 510
+```
+- Now you will have to edit the Makefile's upload function to use your major function, in my case it looks like this: 
+```bash
+sudo mknod /dev/fibonacci c 510 0
+```
+### 4. Writting to The Kernel Module
+- Now the kernel module should be uploaded to /dev/fibonacci
+- To test this, open a terminal and run the following: 
+```bash
+sudo su
+echo "90" > /dev/fibonacci 
+echo "130" > /dev/fibonacci 
+dmesg
+```
+- What you have done is ask fibonacci to solve for 90 and 130, and the dmesg should output the results
+- The results from dmesg should look like this: 
+
+```bash
+[10656.939617] Fibonacci: Module unloaded
+[10656.975779] Fibonacci: Module loaded with major number 510
+[10717.182595] Fibonacci number at index 90: 2880067194370816120
+[10723.828322] Fibonacci number at index 130: 7810785687184081992 + 18446744073709551615 * 35726338
+```

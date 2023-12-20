@@ -12,63 +12,78 @@ MODULE_DESCRIPTION("Fibonacci Device Driver");
 MODULE_VERSION("1.0");
 
 static int major_number;
-//static char *message = NULL; 
-//static short size_of_message;
 
-void fibonacciCalcLow(unsigned long long* result, unsigned int n) 
+struct overLong_t {
+	unsigned long long overCount;
+	unsigned long long remainder;
+};
+
+// Here is the arithmetic function I use to add two numbers from bigNum_t
+struct overLong_t addBigNums(struct overLong_t a, struct overLong_t b) 
 {
-	int i;
-	unsigned long long a = 0, b = 1, temp=0;
-	// 94 -> 19740274219868223167 > 18446744073709551615 unsigned long long max
-	if (n <= 1 || n > 93) {
-		printk("Input must be greater than 0, or less than 94"); 
-		printk("Our input was: %d", n); 
-		return; 
+	struct overLong_t result = {0, 0};  // Default values
+
+	result.remainder = a.remainder + b.remainder;
+
+	// Check for overflow
+	if (result.remainder < a.remainder || result.remainder < b.remainder) {
+		result.overCount = 1;
 	}
 
-	for (i = 1; i <= n; i++) {
-		temp = a + b;
-		a = b;
-		b = temp;
+	result.overCount += a.overCount + b.overCount;
+
+	// Adjust remainder if overflow occurred
+	if (result.overCount > 0) {
+		result.remainder -= (unsigned long long)(-1); // subtract max value to get correct remainder
 	}
 
-	*result=a; 
-	return; 
+	return result;
 }
 
-int countDigitsLow(unsigned long long int num) 
+// returns the fibonacci number with remainder and overflow counter
+struct overLong_t fibonacci(unsigned long long n) 
 {
-	unsigned int count=0; 
-	do {
-		num /= 10;
-		++count;
-	} while (num != 0);
-	printk("Count is: %d", count); 
+	// initalize
+	unsigned long long i; 
+	struct overLong_t a = {0, 0};
+	struct overLong_t b = {0, 1};
+	struct overLong_t temp;
+
+	// no need to calc such small numbers
+	if (n == 0) {
+		return a;
+	} else if(n <= 2) {
+		return b; 
+	}
+
+	for (i = 2; i <= n; ++i) {
+		temp = b;
+		b = addBigNums(a, b);
+		a = temp;
+	}
+
+	return b;
+}
+
+static ssize_t device_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos) 
+{
+	long long unsigned input;
+	struct overLong_t result; 
+	
+	if (kstrtoull_from_user(buf, count, 10, &input) != 0) 
+		return -EINVAL;
+	
+	// Calculate Fibonacci number
+	result = fibonacci(input);
+
+	// Display the result
+	if (result.overCount == 0) {
+		pr_info("Fibonacci number at index %llu: %llu\n", input, result.remainder);
+	} else {
+		pr_info("Fibonacci number at index %llu: %llu + 18446744073709551615 * %llu\n", input, result.remainder, result.overCount);
+		pr_info("18446744073709551615 is the max of unsinged long long, so overflow will occur here"); 
+	}
 	return count; 
-}
-/*
-// Function to allocate memory for the message buffer
-static int allocate_message_buffer(int offset) {
-    message = kmalloc(offset, GFP_KERNEL);
-    if (!message) {
-        printk(KERN_ERR "Failed to allocate memory for the message buffer\n");
-        return -ENOMEM;
-    }
-    return 0;
-}
-*/
-static ssize_t device_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos) {
-    long long unsigned input, result;
-
-    if (kstrtoull_from_user(buf, count, 10, &input) != 0) {
-        return -EINVAL;
-    }
-
-    fibonacciCalcLow(&result, input);
-    
-    pr_info("Fibonacci result for input %llu: %llu\n", input, result);
-
-    return count;
 }
 
 // The only thing this module can do is read

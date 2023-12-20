@@ -14,10 +14,10 @@ int main(int argc, int** argv)
 		// Overloading would be very nice right now
 		if(number>93) {
 			
-			mpfr_t result; // [1] so technically * already
+			mpz_t result; // [1] so technically * already
 			printf("Calculating Fibonacci Number for %d ... \n", number);  
 			fibonacciCalcHigh(result, number);
-			mpfr_printf("Fibonacci Number of %d is: %.*Rf\n", number, 0, result);
+			gmp_printf("Fibonacci Number of %d is: %Zd\n", number, result);
 			printf("The # digits is: %d", countDigitsHigh(result));  	
 		} else {
 			long long unsigned result; 

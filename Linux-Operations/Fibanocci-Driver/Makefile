@@ -29,7 +29,10 @@ reinstall:
 	sudo rmmod fibonacci
 	sudo insmod fibonacci.ko
 
-# To Make the driver run: sudo mknod /dev/fibonacci c <major_number> 0
-# Clean rule
+test: 
+	gcc src/fibonacciCalc.c src/test-with-gmp.c -o test-with-gmp -lgmp -Iinclude
+	gcc src/test-without-gmp.c -o test-without-gmp
 clean:
 	make -C $(KDIR) M=$(PWD) clean
+	rm test-without-gmp test-with-gmp
+
