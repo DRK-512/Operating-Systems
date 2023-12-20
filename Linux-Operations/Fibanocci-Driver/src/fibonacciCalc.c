@@ -28,7 +28,7 @@ void fibonacciCalcLow(unsigned long long* result, unsigned int n)
 	return; 
 }
 
-void fibonacciCalcHigh(mpz_t result, unsigned int n) 
+void fibonacciCalcHigh(mpfr_t result, unsigned int n) 
 {
 	if (n < 94) {
 		printf("Input must be greater than 93"); 
@@ -45,22 +45,56 @@ void fibonacciCalcHigh(mpz_t result, unsigned int n)
 		b = temp;
 	}
 
-	mpz_t bA, bB, bTemp;
-	mpz_inits(bA, bB, bTemp, NULL);
-
-	mpz_set_ui(bA, temp);
-	mpz_set_ui(bTemp, a);
-	mpz_add(bB, bA, bTemp); 
+	mpfr_t bA, bB, bTemp;
+	
+	// as numbers increase, accuracy decreases
+	if (n<500) {
+		mpfr_init2(bA, 1024); // Set precision to 1024 bits
+		mpfr_init2(bB, 1024); // Set precision to 1024 bits
+		mpfr_init2(bTemp, 1024); // Set precision to 1024 bits
+		mpfr_init2(result, 1024); // Set precision to 1024 bits
+	} else {
+		mpfr_init2(bA, n*2); // Set precision to 1024 bits
+		mpfr_init2(bB, n*2); // Set precision to 1024 bits
+		mpfr_init2(bTemp, n*2); // Set precision to 1024 bits
+		mpfr_init2(result, n*2); // Set precision to 1024 bits
+	}
+	
+	mpfr_set_ui(bA, temp, MPFR_RNDN);
+	mpfr_set_ui(bTemp, a, MPFR_RNDN);
+	mpfr_add(bB, bA, bTemp, MPFR_RNDN); 
 
 	for (i = 94; i <= n; i++) {
-		mpz_add(bTemp, bA, bB);
-		mpz_set(bA, bB);
-		mpz_set(bB, bTemp);
+		mpfr_add(bTemp, bA, bB, MPFR_RNDN);
+		mpfr_set(bA, bB, MPFR_RNDN);
+		mpfr_set(bB, bTemp, MPFR_RNDN);
 	}
 
-	mpz_set(result, bA);
-	mpz_clears(bA, bB, bTemp, NULL);
-
+	mpfr_set(result, bA, MPFR_RNDN);
+	mpfr_clear(bA);
+	mpfr_clear(bB);
+	mpfr_clear(bTemp);
 	return; 
 }
 
+int countDigitsLow(unsigned long long int num) 
+{
+	unsigned int count=0; 
+	do {
+		num /= 10;
+		++count;
+	} while (num != 0);
+	printf("\nCount is: %d", count); 
+	return count; 
+}
+
+// I could use mpz_sizeinbase, but fib(130) should be 27 # long, but mpz_size returns 28, so I want more accurate numbers
+int countDigitsHigh(mpfr_t num) 
+{	
+	int count=0;  
+	while (mpfr_cmp_d(num, 1.0) >= 0) {
+		mpfr_div_ui(num, num, 10, MPFR_RNDN);
+		count++;
+	}
+	return count;
+}
