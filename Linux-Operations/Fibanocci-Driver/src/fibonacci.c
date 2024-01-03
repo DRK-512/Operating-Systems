@@ -2,6 +2,8 @@
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/uaccess.h>
+#include <linux/kernel.h>
+#include <linux/string.h>
 
 #define DEVICE_NAME "fibonacci"
 
@@ -13,76 +15,108 @@ MODULE_VERSION("1.0");
 
 static int major_number;
 
-struct overLong_t {
-	unsigned long long overCount;
-	unsigned long long remainder;
-};
-
-// Here is the arithmetic function I use to add two numbers from bigNum_t
-struct overLong_t addBigNums(struct overLong_t a, struct overLong_t b) 
+// Here is the arithmetic function I use to add two numbers 
+char* addStrings(char* num1, char* num2, char* result) 
 {
-	struct overLong_t result = {0, 0};  // Default values
+	unsigned long long len1 = strlen(num1), len2 = strlen(num2);
+	unsigned long long rS = len2+1; 
+	unsigned int diff=0, i, sum=0, carry = 0, digit1=0, digit2=0;
 
-	result.remainder = a.remainder + b.remainder;
+	// in case len1<len2, this will cuase issues later
+	if(len1!=len2)
+		diff=1; 
 
-	// Check for overflow
-	if (result.remainder < a.remainder || result.remainder < b.remainder) {
-		result.overCount = 1;
+	// Traverse both strings from right to left
+	for (i = rS-1; i > 0; i--) {
+		
+		if((i-diff)>0){
+			digit1 = num1[i-diff-1] - '0';
+			digit2 = num2[i-1] - '0';
+		} else {
+			digit1 = 0;
+			digit2 = num2[i-1] - '0';
+		}
+
+		sum = digit1 + digit2 + carry;
+		
+		// sum can only be a single digit, so that is why we have the carry
+		if(sum>9) {
+			sum-=10; 
+			carry=1; 
+		} else {
+			carry=0; 
+		}
+
+		if(i!=1){
+			result[i] = sum + '0';
+		} else {
+			result[1] = sum + '0';
+			if(carry==0){
+				memmove(result, result + 1, rS);
+				rS--; 
+			} else {
+				result[0] = carry + '0';
+			}
+		}
 	}
+	return result; 
+}
 
-	result.overCount += a.overCount + b.overCount;
-
-	// Adjust remainder if overflow occurred
-	if (result.overCount > 0) {
-		result.remainder -= (unsigned long long)(-1); // subtract max value to get correct remainder
-	}
-
-	return result;
+char* my_strdup(const char* str) {
+    size_t len = strlen(str) + 5;
+    char* new_str = (char*)kmalloc(len, GFP_KERNEL);
+    if (new_str != NULL) {
+        strcpy(new_str, str);
+    }
+    return new_str;
 }
 
 // returns the fibonacci number with remainder and overflow counter
-struct overLong_t fibonacci(unsigned long long n) 
+char* fibonacci(unsigned long long n) 
 {
 	// initalize
 	unsigned long long i; 
-	struct overLong_t a = {0, 0};
-	struct overLong_t b = {0, 1};
-	struct overLong_t temp;
+	char *a, *b, *temp;  
 
 	// no need to calc such small numbers
-	if (n == 0) {
-		return a;
-	} else if(n <= 2) {
-		return b; 
-	}
+	if (n == 0)
+		return "0"; 
+	else if(n <= 2) 
+		return "1"; 
 
-	for (i = 2; i <= n; ++i) {
-		temp = b;
-		b = addBigNums(a, b);
-		a = temp;
-	}
+	a = my_strdup("0");
+	b = my_strdup("1");
+	temp = (char*)kmalloc(2, GFP_KERNEL);
+	
+	for (i = 2; i <= n; i++) {
+		// always reallocate before assignment
+		kfree(temp); 
+		temp = addStrings(a, b, (char *)kcalloc(strlen(b)+2, sizeof(char), GFP_KERNEL));
 
+		kfree(a);
+		a = my_strdup(b);
+
+		kfree(b);
+		b = my_strdup(temp);
+
+	}
+	kfree(a); 
+	kfree(temp); 
 	return b;
 }
 
 static ssize_t device_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos) 
 {
 	long long unsigned input;
-	struct overLong_t result; 
+	char* result; 
 	
 	if (kstrtoull_from_user(buf, count, 10, &input) != 0) 
 		return -EINVAL;
 	
-	// Calculate Fibonacci number
 	result = fibonacci(input);
+	pr_info("Fibonacci number at index %llu: %s", input, result);
+	kfree(result); 
 
-	// Display the result
-	if (result.overCount == 0) {
-		pr_info("Fibonacci number at index %llu: %llu\n", input, result.remainder);
-	} else {
-		pr_info("Fibonacci number at index %llu: %llu + 18446744073709551615 * %llu\n", input, result.remainder, result.overCount);
-		pr_info("18446744073709551615 is the max of unsinged long long, so overflow will occur here"); 
-	}
 	return count; 
 }
 

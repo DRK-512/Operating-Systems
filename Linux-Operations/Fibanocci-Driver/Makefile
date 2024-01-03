@@ -28,7 +28,6 @@ reinstall:
 	make -C $(KDIR) M=$(PWD) modules
 	sudo rmmod fibonacci
 	sudo insmod fibonacci.ko
-
 test: 
 	gcc src/fibonacciCalc.c src/test-with-gmp.c -o test-with-gmp -lgmp -Iinclude
 	gcc src/test-without-gmp.c -o test-without-gmp

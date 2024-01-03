@@ -8,14 +8,15 @@
 ## What do we have? 
 - In the src dir we have four .c files
 1. fibonacci.c is the kernel module made for this, and uses the test-without-gmp.c approach since gmp is not part of the kernel 
-2. test-with-gmp.c is a fibonacci solver that actaully displays the number if it is greater than the max of an unsigned long long
-3. test-without-gmp.c 
+2. test-with-gmp.c is a fibonacci solver that uses a GNU library that is not avaible in the linux kernel
+3. test-without-gmp.c is a fibonacci solver that uses a work around from not being able to use gmp
 4. fibonacciCalc.c is a file consisting of the fibonacci functions used for test-with-gmp.c
+5. test-single-add.c is a program that adds two large numbers without it being a fibonacci sequence
 
 ## How The Code Works
 - This is a Linux Driver, so it is a bit different than a simple gcc command followed by execution
 - The test-with-gmp and test-without-gmp is a way to test that fibanocci functions works
-	- Not test-without-gmp will not display the whole number, rather, a reminder and overflow counter for unsigned long long
+- If someone wants to test the faster way using GNU libraries they can look at test-with-gmp
 ```bash
 # Example Output
 $ ./test-with-gmp
@@ -24,9 +25,9 @@ Calculating Fibonacci Number for 130 ...
 Fibonacci Number of 130 is: 659034621587630041982498215
 The # digits is: 27
 $ ./test-without-gmp 
-Enter the index of the Fibonacci sequence: 130
-Fibonacci number at index 130: 7810785687184081992 + 18446744073709551615 * 35726338
-18446744073709551615 is the max of unsinged long long, so overflow will occur here
+Enter Fibonacci number you want: 130
+Calculating Fibonacci Number for 130 ... 
+Fibonacci Number of 130 is: 659034621587630041982498215
 ```
 - The fibonacci.c is the module we will be using, and uses the test-without-gmp approach, so expect that output in the dmesg
 - You need to load the driver to your linux kernel, so that is why the makefile is much longer than usual
@@ -57,15 +58,14 @@ sudo mknod /dev/fibonacci c 510 0
 ```bash
 sudo su
 echo "90" > /dev/fibonacci 
-echo "130" > /dev/fibonacci 
+echo "300" > /dev/fibonacci 
 dmesg
 ```
 - What you have done is ask fibonacci to solve for 90 and 130, and the dmesg should output the results
 - The results from dmesg should look like this: 
 
 ```bash
-[10656.939617] Fibonacci: Module unloaded
-[10656.975779] Fibonacci: Module loaded with major number 510
-[10717.182595] Fibonacci number at index 90: 2880067194370816120
-[10723.828322] Fibonacci number at index 130: 7810785687184081992 + 18446744073709551615 * 35726338
+[11847.563133] Fibonacci: Module loaded with major number 510
+[11886.993597] Fibonacci number at index 90: 2880067194370816120
+[11934.632741] Fibonacci number at index 300: 222232244629420445529739893461909967206666939096499764990979600
 ```
