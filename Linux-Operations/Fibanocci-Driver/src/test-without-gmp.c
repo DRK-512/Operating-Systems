@@ -53,7 +53,8 @@ char* addStrings(char* num1, char* num2, char* result)
 	return result; 
 }
 
-char* my_strdup(const char* str) {
+char* my_strdup(const char* str) 
+{
     size_t len = strlen(str) + 5;
     char* new_str = (char*)malloc(len);
     if (new_str != NULL) {
@@ -96,7 +97,8 @@ char* fibonacci(unsigned long long n)
 	return b;
 }
 
-int main() {
+int main() 
+{
 	unsigned long long index;
 
 	// Get user input
@@ -111,3 +113,4 @@ int main() {
 	free(result); 
 	return 0; 
 }
+
