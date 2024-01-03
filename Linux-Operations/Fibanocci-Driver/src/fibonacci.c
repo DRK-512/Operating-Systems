@@ -62,12 +62,13 @@ char* addStrings(char* num1, char* num2, char* result)
 	return result; 
 }
 
-char* my_strdup(const char* str) {
+char* my_strdup(const char* str) 
+{
     size_t len = strlen(str) + 5;
     char* new_str = (char*)kmalloc(len, GFP_KERNEL);
-    if (new_str != NULL) {
+    if (new_str != NULL) 
         strcpy(new_str, str);
-    }
+    
     return new_str;
 }
 
