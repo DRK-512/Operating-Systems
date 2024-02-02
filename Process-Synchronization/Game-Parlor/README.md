@@ -16,8 +16,8 @@
 	- Monopoly (2 dice)
 	- Pictionary (1 die)
 
-Here are the list of games of played by groups | to 8. Note that each game is played by two
-groups.
+Here are the list of games played by groups 1 to 8
+Note that each game is played by two groups.
 
 | Group Number | Game Played |
 | :------:     | :-----:     |
@@ -39,4 +39,4 @@ For example, group 7 plays Pictionary will play it 5 times. Pictionary needs 1 d
 Each representative will request the corresponding number of dice, and, after using the dice for
 the specified period of time, will return the number of dice that they borrowed.
 
-Credit for this project can be found here: [Task 2](http://web.cecs.pdx.edu/~harry/Blitz/version-1-0/OSProject/p3/proj3.pdf)
+This project idea came from [here](http://web.cecs.pdx.edu/~harry/Blitz/version-1-0/OSProject/p3/proj3.pdf)

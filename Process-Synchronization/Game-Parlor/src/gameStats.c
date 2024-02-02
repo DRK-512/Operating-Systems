@@ -1,8 +1,7 @@
-#include "gameStats.h"
+#include "../include/gameStats.h"
 
 /* 
- * This file is used to store misc functions and variables 
- * We only don't store numRounds here because the main function needs it
+ * This file is used to store misc functions
  */
 
 int available = maxDice;
@@ -104,25 +103,25 @@ char* getRoundName(char amount){
             char str[5];
             char* returnStr; 
             if((amount-1)%10==0) {
-                //1st
+                // 1st
                 sprintf(str, "%d", amount);
                 strcat(str, "st"); 
                 returnStr = str; 
                 return returnStr;  
             } else if((amount-2)%10==0) {
-                //2nd
+                // 2nd
                 sprintf(str, "%d", amount);
                 strcat(str, "nd"); 
                 returnStr = str; 
                 return returnStr;  
             } else if((amount-3)%10==0) {
-                //3rd
+                // 3rd
                 sprintf(str, "%d", amount);
                 strcat(str, "rd"); 
                 returnStr = str; 
                 return returnStr;  
             } else {
-                //4th - 10th
+                // 4th - 10th
                 sprintf(str, "%d", amount);
                 strcat(str, "th"); 
                 returnStr = str; 

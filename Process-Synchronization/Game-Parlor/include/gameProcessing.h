@@ -1,8 +1,10 @@
 #ifndef gameProcessing
 #define gameProcessing
 
-#include "gameStats.h"
+#include "../include/gameStats.h"
+
+#define NUM_ROUNDS 5
+
 void *game(void *param); 
-extern char numRounds;
  
 #endif

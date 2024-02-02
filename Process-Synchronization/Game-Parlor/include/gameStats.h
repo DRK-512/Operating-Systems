@@ -11,11 +11,12 @@
 #define START_GAME 1
 #define FINISH_GAME 2
 #define maxDice 8
+#define PLAY_TIME 1
 
 struct gameStruct {
-    char* name; 
-    char numDice; 
-    char round; 
+	char* name; 
+	char numDice; 
+	char round; 
 }; 
 
 extern int available; 
