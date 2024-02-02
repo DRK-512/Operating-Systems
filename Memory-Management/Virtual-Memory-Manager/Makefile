@@ -1,11 +1,11 @@
 CC = gcc
-CFLAGS = -g
 
-all: Memory_Manager
+all: Virt_Mem_Manager
 
-Memory_Manager: 
-	${CC} ${CFLAGS} main.c -o Memory_Manager
-	./Memory_Manager addresses.txt process.txt
-
+Virt_Mem_Manager: 
+	${CC} src/main.c -o Virt_Mem_Manager 
+	./Virt-Mem-Manager
+	
 clean: 
-	rm Memory_Manager
+	rm Virt-Mem-Manager
+
