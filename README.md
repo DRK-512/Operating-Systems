@@ -14,3 +14,12 @@ These are for learning purposes, please don't plagerize it
 
 The style should follow that of the linux kernel 6.6 styling guide found here: 
 https://www.kernel.org/doc/html/v6.6/process/coding-style.html
+
+
+# Structure
+- There are a few directories in this repo, all containing different types of projects
+## Linux-Operations
+- These are projects that revolve around linux, such as linux command re-creations, or kernel modules 
+## Process-Synchronization
+## Scheduling
+## Memory-Management   
