@@ -2,6 +2,8 @@
 Linux-Operations/ps/5ps
 Linux-Operations/cp/modcp
 Linux-Operations/Unique-ID-Generation/C/GenerateID
+Linux-Operations/KeyPairTalk/stash
+Linux-Operations/KeyPairTalk/key.bin
 
 Process-Synchronization/Bankers-Algorithm/Bankers
 Process-Synchronization/Game-Parlor/Game_Parlor
@@ -11,7 +13,7 @@ Process-Synchronization/Reader-Writer/Reader_Writer
 Process-Synchronization/Sleeping-Barbers/Barber_Shop
 Process-Synchronization/Elevator-Threading/Elevator
 
-Memory-Management/Virtual-Memory-Manager/Memory_Manager
+Memory-Management/Virtual-Memory-Manager/Virt_Mem_Manager
 
 Scheduling/Shortest-Runtime-Scheduler/Shortest_Scheduler
 Scheduling/Round-Robin/bin/
