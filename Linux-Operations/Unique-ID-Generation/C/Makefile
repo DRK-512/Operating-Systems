@@ -1,10 +1,10 @@
 CC = gcc
-CFLAGS = -lm
+CFLAGS = -lm -Wall -Werror
 
 all: idGen
 
 idGen: 
-	${CC} ./src/main.c -o GenerateID ${CFLAGS}
+	${CC} ./src/functions.c ./src/main.c -o GenerateID ${CFLAGS}
 
 clean: 
 	rm GenerateID
