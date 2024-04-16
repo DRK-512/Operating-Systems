@@ -10,6 +10,8 @@
 #include <openssl/evp.h> // EVP_CIPHER_CTX
 #include <getopt.h>      // getopt | long_options | required_argumnents
 
-int initVals(int argc, char *argv[], key_t* KEY, unsigned char* AES_KEY); 
+int initVals(int argc, char *argv[], key_t* m_key, unsigned char* m_aeskey); 
+int readMem(EVP_CIPHER_CTX * m_ctx, char* m_stash, unsigned char* m_aeskey); 
+int writeMem(EVP_CIPHER_CTX * m_ctx, char* m_stash, unsigned char* m_aeskey); 
 
 #endif
