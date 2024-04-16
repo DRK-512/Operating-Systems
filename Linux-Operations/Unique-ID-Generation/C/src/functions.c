@@ -14,7 +14,7 @@ int initParams(int argc, char* argv[], int* idSize) {
 			*idSize = atoi(optarg);
 			break;
 		case 'h':
-			printf("Usage: %s [-k|--key <key_file>] [-h|--help]\n", argv[0]);
+			printf("Usage: %s [-s|--size <key_size>] [-h|--help]\n", argv[0]);
 			return 0;
 		default:
 			printf("%c Invalid option.\n", opt);

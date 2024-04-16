@@ -13,9 +13,9 @@
 	- BIOS_INFO
 - With the system information fetched in bash, I then hashed it with sha256, and gave it to the user
 ## C Approach
-- In C I fetched the Machine-id.txt file located in /etc
-- I then took all the numbers out of the machine-id into a seed, and created a randomized ID with numbers and letters
-- There is a global varible for the length of the ID so it can be however long you want it to be
+- In C I fetched the Machine-id.txt & Machine-info.txt files located in /etc
+- I then take the content from these files and set them to a seed which then creates a randomized ID with numbers and letters
+- Default size is 32, but that can be adjusted with the -s or --size flags
 ## To Run Bash
 - To run the bash approach run the command
 ```bash
