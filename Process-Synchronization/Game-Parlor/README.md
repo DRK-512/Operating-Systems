@@ -1,6 +1,4 @@
 # The Game Parlor Problem
-**Author: Darek Konopka**
-
 ## Project Description
 - Eight groups of customers come in to a game parlor to play games
 - Each group comes into the parlor wanting to play their favorite game where each game involves a different number of dice
