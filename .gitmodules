@@ -1,3 +1,12 @@
-[submodule "Secuity/Keylogger"]
-	path = Secuity/Keylogger
-	url = https://github.com/DRK-512/Keylogger.git
+[submodule "Linux-Operations/Fibanocci-Kernel-Driver"]
+	path = Linux-Operations/Fibanocci-Kernel-Driver
+	url = https://github.com/DRK-512/Fibanocci-Kernel-Driver.git
+[submodule "Linux-Operations/Unique-ID-Generator"]
+	path = Linux-Operations/Unique-ID-Generator
+	url = https://github.com/DRK-512/Unique-ID-Generator.git
+[submodule "Secuity/Kernel-Keypair-Talk"]
+	path = Secuity/Kernel-Keypair-Talk
+	url = https://github.com/DRK-512/Kernel-Keypair-Talk.git
+[submodule "Secuity/Linux-Keylogger"]
+	path = Secuity/Linux-Keylogger
+	url = https://github.com/DRK-512/Linux-Keylogger.git
