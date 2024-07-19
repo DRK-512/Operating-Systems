@@ -25,25 +25,3 @@ https://www.kernel.org/doc/html/v6.6/process/coding-style.html
 ## Memory-Management   
 - These are all examples of memory management processes, all implemented in different ways.
 
-## Repository Progress
-**█**: ![Finished](https://img.shields.io/badge/Status-Finished-brightgreen)<br>
-**░**: ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow)<br>
-**֍**: ![Not Started](https://img.shields.io/badge/Status-Not%20Started-lightgrey)
-
-### Linux-Operations Progress
-	██████████░░░░░░░░░░ 2/4 
-
-### Memory-Management Progress
-	░░░░░֍֍֍֍֍֍֍֍֍֍֍֍֍֍֍ 0/4
-
-### Process-Synchronization Progress
-	░░░░░░░░░░░░░░░░░֍֍֍ 0/8
-
-### Scheduling Progress
-	░░░░░░░░░░░░░░░░░֍֍֍ 0/8
-
-### Secuity Progress
-	█████░░░░░֍֍֍֍֍֍֍֍֍֍ 1/4
-
-### Total Progress
-	███░░░░░░░░░░░░░░░░░֍֍֍֍֍֍֍ 3/27 
