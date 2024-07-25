@@ -1,7 +1,7 @@
 # Operating-Systems
-## REMINDER SOON THIS WILL BE A COLLECTION OF SUBMODULES
 This repo consists of random operating systems project I have done whilst reading "Operating Systems Concepts by Abraham Silberschatz, Peter Baer Galvin, and Greg Gagne" or random projects I made up because I was bored <br> 
 Another great place for Operating System information is (GeekForGeeks)[https://www.geeksforgeeks.org/operating-systems/?ref=shm]
+Essentially it will act as a database of operating systems based repos I have done for easier navigation. 
 
 Each project is categorized based off section, and each project should have its own README 
 For every project simply run the make command, then some executable will be generated, unless the README states otherwise<br>

@@ -10,3 +10,6 @@
 [submodule "Secuity/Linux-Keylogger"]
 	path = Secuity/Linux-Keylogger
 	url = https://github.com/DRK-512/Linux-Keylogger.git
+[submodule "Linux-Operations/mod-cp"]
+	path = Linux-Operations/mod-cp
+	url = https://github.com/DRK-512/modified-cp.git
