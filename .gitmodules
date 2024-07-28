@@ -13,3 +13,6 @@
 [submodule "Linux-Operations/mod-cp"]
 	path = Linux-Operations/mod-cp
 	url = https://github.com/DRK-512/modified-cp.git
+[submodule "Linux-Operations/mod-rm"]
+	path = Linux-Operations/mod-rm
+	url = https://github.com/DRK-512/Secure-Delete.git
