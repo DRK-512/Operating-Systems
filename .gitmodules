@@ -1,9 +1,6 @@
 [submodule "Linux-Operations/Fibanocci-Kernel-Driver"]
 	path = Linux-Operations/Fibanocci-Kernel-Driver
 	url = https://github.com/DRK-512/Fibanocci-Kernel-Driver.git
-[submodule "Security/Unique-ID-Generator"]
-	path = Security/Unique-ID-Generator
-	url = https://github.com/DRK-512/Unique-ID-Generator.git
 [submodule "Secuity/Kernel-Keypair-Talk"]
 	path = Secuity/Kernel-Keypair-Talk
 	url = https://github.com/DRK-512/Kernel-Keypair-Talk.git
@@ -16,3 +13,6 @@
 [submodule "Linux-Operations/mod-rm"]
 	path = Linux-Operations/mod-rm
 	url = https://github.com/DRK-512/Secure-Delete.git
+[submodule "Secuity/Unique-ID-Gen"]
+	path = Secuity/Unique-ID-Gen
+	url = https://github.com/DRK-512/Unique-ID-Generator.git
