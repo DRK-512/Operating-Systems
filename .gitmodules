@@ -16,3 +16,12 @@
 [submodule "Secuity/Unique-ID-Gen"]
 	path = Secuity/Unique-ID-Gen
 	url = https://github.com/DRK-512/Unique-ID-Generator.git
+[submodule "Networking/Webserver"]
+	path = Networking/Webserver
+	url = https://github.com/DRK-512/Rust_Webserver.git
+[submodule "Networking/Webscaper"]
+	path = Networking/Webscaper
+	url = https://github.com/DRK-512/Webscaper.git
+[submodule "Networking/Port-Scanner"]
+	path = Networking/Port-Scanner
+	url = https://github.com/DRK-512/Port-Scanner.git
