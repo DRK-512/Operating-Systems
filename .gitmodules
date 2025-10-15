@@ -25,3 +25,6 @@
 [submodule "Networking/Port-Scanner"]
 	path = Networking/Port-Scanner
 	url = https://github.com/DRK-512/Port-Scanner.git
+[submodule "Misc/Rotating-Cube"]
+	path = Misc/Rotating-Cube
+	url = https://github.com/DRK-512/Rotating-Cube.git
