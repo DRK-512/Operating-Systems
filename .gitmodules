@@ -10,9 +10,6 @@
 [submodule "Linux-Operations/mod-cp"]
 	path = Linux-Operations/mod-cp
 	url = https://github.com/DRK-512/modified-cp.git
-[submodule "Linux-Operations/mod-rm"]
-	path = Linux-Operations/mod-rm
-	url = https://github.com/DRK-512/Secure-Delete.git
 [submodule "Secuity/Unique-ID-Gen"]
 	path = Secuity/Unique-ID-Gen
 	url = https://github.com/DRK-512/Unique-ID-Generator.git
@@ -28,3 +25,9 @@
 [submodule "Misc/Rotating-Cube"]
 	path = Misc/Rotating-Cube
 	url = https://github.com/DRK-512/Rotating-Cube.git
+[submodule "Linux-Operations/mod-ps"]
+	path = Linux-Operations/mod-ps
+	url = https://github.com/DRK-512/mod-ps.git
+[submodule "Linux-Operations/secure-rm"]
+	path = Linux-Operations/secure-rm
+	url = https://github.com/DRK-512/secure-rm.git
