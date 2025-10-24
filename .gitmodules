@@ -31,3 +31,9 @@
 [submodule "Linux-Operations/secure-rm"]
 	path = Linux-Operations/secure-rm
 	url = https://github.com/DRK-512/secure-rm.git
+[submodule "Process-Synchronization/Game-Parlor"]
+	path = Process-Synchronization/Game-Parlor
+	url = https://github.com/DRK-512/Game-Parlor.git
+[submodule "Process-Synchronization/Dining-Philosophers"]
+	path = Process-Synchronization/Dining-Philosophers
+	url = https://github.com/DRK-512/Dining-Philosophers.git
