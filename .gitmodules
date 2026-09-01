@@ -1,27 +1,27 @@
-[submodule "Secuity/Kernel-Keypair-Talk"]
-	path = Secuity/Kernel-Keypair-Talk
+[submodule "secuity/Kernel-Keypair-Talk"]
+	path = secuity/Kernel-Keypair-Talk
 	url = https://github.com/DRK-512/Kernel-Keypair-Talk.git
-[submodule "Secuity/Linux-Keylogger"]
-	path = Secuity/Linux-Keylogger
+[submodule "secuity/Linux-Keylogger"]
+	path = secuity/Linux-Keylogger
 	url = https://github.com/DRK-512/Linux-Keylogger.git
-[submodule "Secuity/Unique-ID-Gen"]
-	path = Secuity/Unique-ID-Gen
+[submodule "secuity/Unique-ID-Gen"]
+	path = secuity/Unique-ID-Gen
 	url = https://github.com/DRK-512/Unique-ID-Generator.git
-[submodule "Networking/Webserver"]
-	path = Networking/Webserver
+[submodule "networking/Webserver"]
+	path = networking/Webserver
 	url = https://github.com/DRK-512/Rust_Webserver.git
-[submodule "Networking/Webscaper"]
-	path = Networking/Webscaper
+[submodule "networking/Webscaper"]
+	path = networking/Webscaper
 	url = https://github.com/DRK-512/Webscaper.git
-[submodule "Networking/Port-Scanner"]
-	path = Networking/Port-Scanner
+[submodule "networking/Port-Scanner"]
+	path = networking/Port-Scanner
 	url = https://github.com/DRK-512/Port-Scanner.git
-[submodule "Misc/Rotating-Cube"]
-	path = Misc/Rotating-Cube
+[submodule "misc/Rotating-Cube"]
+	path = misc/Rotating-Cube
 	url = https://github.com/DRK-512/Rotating-Cube.git
-[submodule "Process-Synchronization/Game-Parlor"]
-	path = Process-Synchronization/Game-Parlor
+[submodule "process_synchronization/Game-Parlor"]
+	path = process_synchronization/Game-Parlor
 	url = https://github.com/DRK-512/Game-Parlor.git
-[submodule "Process-Synchronization/Dining-Philosophers"]
-	path = Process-Synchronization/Dining-Philosophers
+[submodule "process_synchronization/Dining-Philosophers"]
+	path = process_synchronization/Dining-Philosophers
 	url = https://github.com/DRK-512/Dining-Philosophers.git
