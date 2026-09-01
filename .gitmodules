@@ -1,15 +1,9 @@
-[submodule "Linux-Operations/Fibanocci-Kernel-Driver"]
-	path = Linux-Operations/Fibanocci-Kernel-Driver
-	url = https://github.com/DRK-512/Fibanocci-Kernel-Driver.git
 [submodule "Secuity/Kernel-Keypair-Talk"]
 	path = Secuity/Kernel-Keypair-Talk
 	url = https://github.com/DRK-512/Kernel-Keypair-Talk.git
 [submodule "Secuity/Linux-Keylogger"]
 	path = Secuity/Linux-Keylogger
 	url = https://github.com/DRK-512/Linux-Keylogger.git
-[submodule "Linux-Operations/mod-cp"]
-	path = Linux-Operations/mod-cp
-	url = https://github.com/DRK-512/modified-cp.git
 [submodule "Secuity/Unique-ID-Gen"]
 	path = Secuity/Unique-ID-Gen
 	url = https://github.com/DRK-512/Unique-ID-Generator.git
@@ -25,12 +19,6 @@
 [submodule "Misc/Rotating-Cube"]
 	path = Misc/Rotating-Cube
 	url = https://github.com/DRK-512/Rotating-Cube.git
-[submodule "Linux-Operations/mod-ps"]
-	path = Linux-Operations/mod-ps
-	url = https://github.com/DRK-512/mod-ps.git
-[submodule "Linux-Operations/secure-rm"]
-	path = Linux-Operations/secure-rm
-	url = https://github.com/DRK-512/secure-rm.git
 [submodule "Process-Synchronization/Game-Parlor"]
 	path = Process-Synchronization/Game-Parlor
 	url = https://github.com/DRK-512/Game-Parlor.git

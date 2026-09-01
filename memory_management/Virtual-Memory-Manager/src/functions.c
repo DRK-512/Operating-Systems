@@ -60,21 +60,22 @@ uint8_t check_args(arguments args) {
         return 0;
 }
 
+// This will do the virtual mem management
 void main_loop(const char address_path, const char process_path) {
         // Open the files right away
         FILE *address_file = fopen(address_path, "r");
         FILE *process_file = fopen(process_path, "r");
 
-        int    l_address_int       = 0;
+        int    log_addr_int       = 0;
         int    page_num            = 0;
         int    offset              = 0;
         int    buffer              = 0;
-        double page_faults          = 0;
+        double page_faults         = 0;
         double addresses_requested = 0;
 
         // Utilize calloc because I want to start with the mem being 0
-        char *process_buffer  = (char *)calloc(CHAR_BIT - 1, sizeof(char));
-        char *logical_address = (char *)calloc(CHAR_BIT - 1, sizeof(char));
+        char *process_buffer  = (char *)calloc(7, sizeof(char));
+        char *logical_address = (char *)calloc(7, sizeof(char));
 
         // Initially, all entries in the page table will be invalid since there are no pages on the RAM.
         memset(page_table, -1, sizeof(page_table));
@@ -84,18 +85,15 @@ void main_loop(const char address_path, const char process_path) {
         // find the page number, bring in the page from process.txt,
         // and put it on RAM and then read the data at the address.
         while (fgets(logical_address, 7, address_file)) {
-                // 1. When CPU needs data at logical address 500 (first time) there is a page fault 
-                // 2. and the page containing the logical address 500 is bought into the simulated RAM and placed in a frame.
-                // 3. The logical address is then translated to a physical address and the data is read from the RAM.
-                // NOTE: The second access to addresses in the same page should not cause page fault unless that page has been removed.
-                // Assume: The sequences of 300 addresses that CPU needs is available in addresses.txt.
-                // NOTE: If the page is already available on the RAM, the frame number will be available in the page table.
-// LEFT OFF HERE
-                // set varibles to use for the rest of the function
+                // I have to convert the address since it reads in as a string
+                log_addr_int = atoi(logical_address);
+
+                // I need address total so I can divide by it in the end
                 addresses_requested++;
-                l_address_int = atoi(logical_address);
-                page_num      = l_address_int / CHAR_BIT * 2;
-                offset        = l_address_int % CHAR_BIT * 2;
+
+                // page number is logical address, then we
+                page_num      = log_addr_int / 16;
+                offset        = log_addr_int % 16;
 
                 // If the page number is avalible, then we can write to it
                 if (page_table[page_num] == -1) {
@@ -103,9 +101,8 @@ void main_loop(const char address_path, const char process_path) {
                         page_faults++;
                         buffer = 0;
 
-                        while (buffer < page_num * (CHAR_BIT - 1) - 1) {
-                                fgets(process_buffer, CHAR_BIT - 1,
-                                      processFile);
+                        while (buffer < page_num * 7 - 1) {
+                                fgets(process_buffer, 7, processFile);
                                 buffer++;
                         }
 
@@ -158,7 +155,7 @@ void main_loop(const char address_path, const char process_path) {
                         char data = ram[pageTable[page_num]].values[offset];
                         printf("Logical Address: %d, Physical Address: %d, "
                                "Data: %c \n",
-                               l_address_int, physicalAddress, data);
+                               log_addr_int, physicalAddress, data);
 
                 } else {
 
@@ -168,7 +165,7 @@ void main_loop(const char address_path, const char process_path) {
                         char data            = ram[ram_index].values[offset];
                         printf("Logical Address: %d, Physical Address: %d, "
                                "Data: %c \n",
-                               l_address_int, physicalAddress, data);
+                               log_addr_int, physicalAddress, data);
                 }
 
                 // check RAM for page number

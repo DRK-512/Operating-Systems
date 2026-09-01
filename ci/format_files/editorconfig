@@ -1,0 +1,23 @@
+[*.sh]
+   # Ensure we use utf-8 characters in our code
+   charset = utf-8
+   # Unix-style newlines with a newline ending every file
+   end_of_line = lf
+   # 8 spaces per tab
+   indent_size = 8
+   # Use space > tabs
+   indent_style = space
+   # like -kp: Keep column alignment paddings, I want 8 space tabs > perserve whatever is there
+   keep_padding = false
+   # like -sr: redirect operators will be followed by a space
+   space_redirects = true
+   # like -bn: binary p[s (&& or |) may start a line
+   binary_next_line = true
+   # like -ci: indents switch cases
+   switch_case_indent = true
+   # like -fn function opening braces are place on same line instead of separate line
+   function_next_line = false
+   # Check whitespace at end of line
+   trim_trailing_whitespace = true
+   # Since this is only for bash, we will use the bash shell format
+   shell_variant = bash

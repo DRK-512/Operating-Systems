@@ -1,0 +1,21 @@
+# Indentation: 8 spaces per tab, spaces instead of tabs (Linux Kernel Style)
+BasedOnStyle: LLVM
+IndentWidth: 8
+UseTab: Never
+
+# Keep column alignment paddings
+# no direct key, but AlignConsecutiveAssignments/Declarations can help
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+
+# Binary operators may start a line
+BreakBeforeBinaryOperators: All
+
+# Indent switch cases
+IndentCaseLabels: true
+
+# Function opening braces on same line
+BreakBeforeBraces: Attach
+
+# max column length is 120 chars
+ColumnLimit: 120

@@ -1,0 +1,16 @@
+# cargo +nightly fmt
+unstable_features = true
+
+# Person features
+wrap_comments = true
+binop_separator = "Back"
+brace_style = "SameLineWhere"
+format_strings = true
+struct_lit_width = 120
+
+# Both from linux guidelines
+max_width = 120
+array_width = 120
+tab_spaces = 8
+error_on_line_overflow = true
+blank_lines_upper_bound = 1

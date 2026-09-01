@@ -1,0 +1,24 @@
+format:
+   # 8 space tabs
+   tab_size: 8
+   # Use spaces instead of tabs
+   use_tabchars: false
+   # Trailing parenthesis on its own line
+   dangle_parens: true
+   # Max length per line
+   line_width: 120
+   # What style line endings to use in the output.
+   line_ending: 'unix'
+   # If true, the argument lists which are known to be sortable will be sorted
+   # lexicographicall
+   enable_sort: true
+markup:
+   # Disable comment markup parsing and reflow - this is the KEY setting
+   # that prevents cmake-format from merging/wrapping your multi-line comments
+   enable_markup: false
+   # Treat the first comment in each listfile as literal (preserved as-is)
+   first_comment_is_literal: true
+   # Don't auto-generate or canonicalize hash rulers (####### lines)
+   canonicalize_hashrulers: false
+   # Effectively disable hash ruler generation by requiring a huge min length
+   hashruler_min_length: 1000
