@@ -1,0 +1,3 @@
+[submodule "misc/rotating_cube"]
+	path = misc/rotating_cube
+	url = https://github.com/DRK-512/Rotating-Cube.git
