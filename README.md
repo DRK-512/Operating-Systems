@@ -12,6 +12,9 @@ cmake --build build
 As I complete sections, I will add it to the top-level cmake, but most stuff will be developmental until I finish<br>
 As for style, I will manage that with the format script and format files I define in `./ci/format-files`<br>
 
+# Required
+https://github.com/ThrowTheSwitch/Unity.git version v2.7.0
+
 # Sections Explained
 For each of the sections, I have a set of lessons learned I want to achieve
 
